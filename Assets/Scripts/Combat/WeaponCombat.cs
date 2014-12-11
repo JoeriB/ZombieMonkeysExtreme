@@ -95,7 +95,7 @@ public class WeaponCombat : MonoBehaviour
 
             AudioSource.PlayClipAtPoint(weaponConfig.fireSound, transform.position);
 
-            animator.SetTrigger(GetWeaponShootTrigger());
+            animator.SetTrigger(GetWeaponShootTrigger(weapon.weaponType));
 
             shootParticle.Play();
             aimLine.enabled = true;
@@ -140,7 +140,7 @@ public class WeaponCombat : MonoBehaviour
             weapon.currentBulletsInMag += bulletsLeftInMag;
             weapon.currentTotalBullets -= bulletsLeftInMag;
 
-            animator.SetTrigger(GetWeaponReloadTrigger());
+            animator.SetTrigger(GetWeaponReloadTrigger(this.name));
 
             //Delay updateText while reloading.
             yield return new WaitForSeconds(weapon.timeBetweenReload);
@@ -160,12 +160,27 @@ public class WeaponCombat : MonoBehaviour
         weaponImage.sprite = weaponConfig.weaponSprite;
     }
 
-    private int GetWeaponShootTrigger()
+    private int GetWeaponShootTrigger(WeaponType weaponType)
     {
-        return Animator.StringToHash("Shoot");
+        int shootTrigger = 0;
+        switch (weaponType)
+        {
+            case WeaponType.MACHINE_GUN:
+                return Animator.StringToHash("MachineGunTrigger");
+        }
+        return shootTrigger;
     }
-    private int GetWeaponReloadTrigger()
+    private int GetWeaponReloadTrigger(string weaponName)
     {
-        return Animator.StringToHash("Reload");
+        int reloadTrigger = 0;
+        if (weaponName.ToLower().Contains("m4a1"))
+        {
+            return Animator.StringToHash("M4A1@Reload");
+        }
+        if (weaponName.ToLower().Contains("ak"))
+        {
+            return Animator.StringToHash("AK47@Reload");
+        }
+        return reloadTrigger;
     }
 }
