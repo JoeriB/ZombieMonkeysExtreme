@@ -20,7 +20,6 @@ public class WeaponManager : MonoBehaviour
     void Start()
     {
         ActivateNextWeapon();
-        //animator.SetTrigger("M4A1@Switch");
     }
 
     // Update is called once per frame

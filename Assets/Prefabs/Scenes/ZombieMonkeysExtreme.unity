@@ -74382,7 +74382,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   switchConfig:
     canSwitch: 0
-    timeBetweenSwitch: 2.5
+    timeBetweenSwitch: 0
     switchTimer: 0
   weaponList:
   - {fileID: 1951714226}

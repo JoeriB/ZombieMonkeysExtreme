@@ -67,7 +67,7 @@ public class WeaponCombat : MonoBehaviour
             aimLine = shootParticle.GetComponent<LineRenderer>();
         }
         UpdateWeaponText();
-
+        //ResetTriggers();
     }
     // Update is called once per frame
     void Update()
@@ -114,7 +114,9 @@ public class WeaponCombat : MonoBehaviour
 
             AudioSource.PlayClipAtPoint(weaponConfig.fireSound, transform.position);
 
-            animator.SetTrigger(GetWeaponShootTrigger());
+            //ResetTriggers();
+            //animator.SetTrigger(GetWeaponShootTrigger());
+            PlayShootAnimation();
 
             shootParticle.Play();
             aimLine.enabled = true;
@@ -165,7 +167,9 @@ public class WeaponCombat : MonoBehaviour
             weapon.currentBulletsInMag += bulletsLeftInMag;
             weapon.currentTotalBullets -= bulletsLeftInMag;
 
-            animator.SetTrigger(GetWeaponReloadTrigger());
+            //ResetTriggers();
+            PlayReloadAnimation();
+            //animator.SetTrigger(GetWeaponReloadTrigger());
 
             //Delay updateText while reloading.
             yield return new WaitForSeconds(weapon.timeBetweenReload);
@@ -173,9 +177,16 @@ public class WeaponCombat : MonoBehaviour
         }
     }
 
+    private void ResetTriggers()
+    {
+        animator.ResetTrigger(GetWeaponDrawTrigger());
+        animator.ResetTrigger(GetWeaponReloadTrigger());
+        animator.ResetTrigger(GetWeaponDrawTrigger());
+    }
     public void DrawWeapon()
     {
-        animator.SetTrigger(GetWeaponDrawTrigger());
+        //ResetTriggers();
+        PlayDrawAnimation();
         AudioSource.PlayClipAtPoint(weaponConfig.drawSound, transform.position);
     }
     public void UpdateWeaponText()
@@ -203,5 +214,21 @@ public class WeaponCombat : MonoBehaviour
     private int GetWeaponDrawTrigger()
     {
         return Animator.StringToHash("Draw");
+    }
+
+    public void PlayDrawAnimation()
+    {
+        if (!animator.GetCurrentAnimatorStateInfo(0).nameHash.Equals(GetWeaponDrawTrigger()))
+            animator.SetTrigger(GetWeaponDrawTrigger());
+    }
+    public void PlayReloadAnimation()
+    {
+        if (!animator.GetCurrentAnimatorStateInfo(0).nameHash.Equals(GetWeaponReloadTrigger()))
+            animator.SetTrigger(GetWeaponReloadTrigger());
+    }
+    public void PlayShootAnimation()
+    {
+        if (!animator.GetCurrentAnimatorStateInfo(0).nameHash.Equals(GetWeaponShootTrigger()))
+            animator.SetTrigger(GetWeaponShootTrigger());
     }
 }
