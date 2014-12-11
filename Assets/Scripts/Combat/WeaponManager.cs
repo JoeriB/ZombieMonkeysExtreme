@@ -60,23 +60,9 @@ public class WeaponManager : MonoBehaviour
         ActivateNextWeapon();
 
         WeaponCombat weaponCombat = currentWeapon.GetComponent<WeaponCombat>();
-        weaponCombat.PlayDrawSound();
+        weaponCombat.DrawWeapon();
         weaponCombat.UpdateWeaponText();
 
-        //if (weaponCombat.weapon.weaponType.Equals(WeaponType.PISTOL))
-        //{
-        //    //Animator set pistol idle state
-        //}
-        //if (weaponCombat.weapon.weaponType.Equals(WeaponType.KNIFE))
-        //{
-        //    animator.SetBool("IsKnife", true);
-        //    animator.SetTrigger("Knife@Switch");
-        //}
-        //if (weaponCombat.weapon.weaponType.Equals(WeaponType.MACHINE_GUN))
-        //{
-        //    animator.SetBool("IsKnife", false);
-        //    animator.SetTrigger("M4A1@Switch");
-        //}
         switchConfig.canSwitch = false;
     }
 

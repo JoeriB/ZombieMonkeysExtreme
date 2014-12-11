@@ -58,8 +58,8 @@ public class WeaponCombat : MonoBehaviour
         if (weapon.weaponType != WeaponType.KNIFE)
         {
             aimLine = shootParticle.GetComponent<LineRenderer>();
-            UpdateWeaponText();
         }
+        UpdateWeaponText();
 
     }
     // Update is called once per frame
@@ -148,13 +148,14 @@ public class WeaponCombat : MonoBehaviour
         }
     }
 
-    public void PlayDrawSound()
+    public void DrawWeapon()
     {
+        animator.SetTrigger(GetWeaponDrawTrigger());
         AudioSource.PlayClipAtPoint(weaponConfig.drawSound, transform.position);
     }
     public void UpdateWeaponText()
     {
-        weaponText.text = this.name + Environment.NewLine;
+        weaponText.text = name + Environment.NewLine;
         if (weapon.weaponType != WeaponType.KNIFE)
             weaponText.text += "Ammo: " + weapon.currentBulletsInMag + "/" + weapon.currentTotalBullets;
         weaponImage.sprite = weaponConfig.weaponSprite;
@@ -167,5 +168,10 @@ public class WeaponCombat : MonoBehaviour
     private int GetWeaponReloadTrigger()
     {
         return Animator.StringToHash("Reload");
+    }
+
+    private int GetWeaponDrawTrigger()
+    {
+        return Animator.StringToHash("Draw");
     }
 }
