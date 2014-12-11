@@ -11,7 +11,7 @@ public class WeaponManager : MonoBehaviour
         public float timeBetweenSwitch = 2f;
         public float switchTimer = 0f;
     }
-    public Animator animator;
+    //public Animator animator;
     public Switch switchConfig;
     public GameObject[] weaponList;
     public int currentWeaponIndex = 0;
@@ -20,7 +20,7 @@ public class WeaponManager : MonoBehaviour
     void Start()
     {
         ActivateNextWeapon();
-        animator.SetTrigger("M4A1@Switch");
+        //animator.SetTrigger("M4A1@Switch");
     }
 
     // Update is called once per frame
@@ -63,20 +63,20 @@ public class WeaponManager : MonoBehaviour
         weaponCombat.PlayDrawSound();
         weaponCombat.UpdateWeaponText();
 
-        if (weaponCombat.weapon.weaponType.Equals(WeaponType.PISTOL))
-        {
-            //Animator set pistol idle state
-        }
-        if (weaponCombat.weapon.weaponType.Equals(WeaponType.KNIFE))
-        {
-            animator.SetBool("IsKnife", true);
-            animator.SetTrigger("Knife@Switch");
-        }
-        if (weaponCombat.weapon.weaponType.Equals(WeaponType.MACHINE_GUN))
-        {
-            animator.SetBool("IsKnife", false);
-            animator.SetTrigger("M4A1@Switch");
-        }
+        //if (weaponCombat.weapon.weaponType.Equals(WeaponType.PISTOL))
+        //{
+        //    //Animator set pistol idle state
+        //}
+        //if (weaponCombat.weapon.weaponType.Equals(WeaponType.KNIFE))
+        //{
+        //    animator.SetBool("IsKnife", true);
+        //    animator.SetTrigger("Knife@Switch");
+        //}
+        //if (weaponCombat.weapon.weaponType.Equals(WeaponType.MACHINE_GUN))
+        //{
+        //    animator.SetBool("IsKnife", false);
+        //    animator.SetTrigger("M4A1@Switch");
+        //}
         switchConfig.canSwitch = false;
     }
 
