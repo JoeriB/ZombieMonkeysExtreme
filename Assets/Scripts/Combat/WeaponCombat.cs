@@ -17,13 +17,17 @@ public class WeaponCombat : MonoBehaviour
 
         public float timeBetweenBullets = 0.15f;
         public float timeBetweenReload = 2.0f;
+        public float timeBeforeMagBackIn = 1.0f;
+        public float timeBeforeSpecialSound = 1.2f;
         public float aimLineDisplayTime = 1f;
         public WeaponType weaponType;
     }
     [Serializable]
     public class WeaponConfig
     {
-        public AudioClip reloadSound;
+        public AudioClip reloadMagOutSound;
+        public AudioClip reloadMagInSound;
+        public AudioClip reloadThirdSound;
         public AudioClip fireSound;
         public AudioClip drawSound;
 
@@ -45,7 +49,10 @@ public class WeaponCombat : MonoBehaviour
 
     void Start()
     {
-        shootParticle = GetComponentInChildren<ParticleSystem>();
+        if (weapon.weaponType != WeaponType.KNIFE)
+        {
+            shootParticle = GetComponentInChildren<ParticleSystem>();
+        }
         weaponText = GameObject.FindGameObjectWithTag("WeaponText").GetComponent<Text>();
         weaponImage = GameObject.FindGameObjectWithTag("WeaponImage").GetComponent<Image>();
 
@@ -83,6 +90,18 @@ public class WeaponCombat : MonoBehaviour
         {
             aimLine.enabled = false;
         }
+    }
+
+    IEnumerator ReloadSpecialSound()
+    {
+        yield return new WaitForSeconds(weapon.timeBeforeSpecialSound);
+        AudioSource.PlayClipAtPoint(weaponConfig.reloadThirdSound, transform.position);
+    }
+
+    IEnumerator ReloadMagBackInSound()
+    {
+        yield return new WaitForSeconds(weapon.timeBeforeMagBackIn);
+        AudioSource.PlayClipAtPoint(weaponConfig.reloadMagInSound, transform.position);
     }
 
     IEnumerator Shoot()
@@ -129,8 +148,14 @@ public class WeaponCombat : MonoBehaviour
     {
         if (weapon.currentTotalBullets > 0 && weapon.currentBulletsInMag < weapon.maxBulletsPerMag)
         {
+            StartCoroutine(ReloadMagBackInSound());
+            if (weaponConfig.reloadThirdSound != null)
+            {
+                StartCoroutine(ReloadSpecialSound());
+            }
+
             reloadTimer = 0f;
-            AudioSource.PlayClipAtPoint(weaponConfig.reloadSound, transform.position);
+            AudioSource.PlayClipAtPoint(weaponConfig.reloadMagOutSound, transform.position);
 
             int bulletsLeftInMag = weapon.maxBulletsPerMag - weapon.currentBulletsInMag;
             if (bulletsLeftInMag > weapon.currentTotalBullets)
@@ -155,10 +180,15 @@ public class WeaponCombat : MonoBehaviour
     }
     public void UpdateWeaponText()
     {
-        weaponText.text = name + Environment.NewLine;
-        if (weapon.weaponType != WeaponType.KNIFE)
-            weaponText.text += "Ammo: " + weapon.currentBulletsInMag + "/" + weapon.currentTotalBullets;
-        weaponImage.sprite = weaponConfig.weaponSprite;
+        if (weaponText != null)
+        {
+            weaponText.text = name + Environment.NewLine;
+            if (weapon.weaponType != WeaponType.KNIFE)
+            {
+                weaponText.text += "Ammo: " + weapon.currentBulletsInMag + "/" + weapon.currentTotalBullets;
+            }
+            weaponImage.sprite = weaponConfig.weaponSprite;
+        }
     }
 
     private int GetWeaponShootTrigger()

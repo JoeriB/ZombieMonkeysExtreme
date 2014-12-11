@@ -5,10 +5,16 @@ AnimatorController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: MP443@Controller
+  m_Name: Door@Controller
   serializedVersion: 2
   m_AnimatorParameters:
-  - m_Name: Shoot
+  - m_Name: Open
+    m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: Close
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -33,35 +39,35 @@ Transition:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: 
-  m_SrcState: {fileID: 110200000}
-  m_DstState: {fileID: 110206969}
+  m_SrcState: {fileID: 110247136}
+  m_DstState: {fileID: 110200000}
   m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: Shoot
+    m_ConditionEvent: Open
     m_EventTreshold: 0
-    m_ExitTime: .995001078
+    m_ExitTime: .75
   m_Atomic: 1
   m_Solo: 0
   m_Mute: 0
   m_CanTransitionToSelf: 0
---- !u!1101 &110113993
+--- !u!1101 &110135141
 Transition:
   serializedVersion: 2
   m_ObjectHideFlags: 3
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: 
-  m_SrcState: {fileID: 110206969}
-  m_DstState: {fileID: 110200000}
-  m_TransitionDuration: .0255639553
+  m_SrcState: {fileID: 110200000}
+  m_DstState: {fileID: 110247136}
+  m_TransitionDuration: .00403851317
   m_TransitionOffset: 0
   m_Conditions:
-  - m_ConditionMode: 5
-    m_ConditionEvent: Shoot
+  - m_ConditionMode: 1
+    m_ConditionEvent: Close
     m_EventTreshold: 0
-    m_ExitTime: 1.00413513
+    m_ExitTime: 15
   m_Atomic: 1
   m_Solo: 0
   m_Mute: 0
@@ -71,28 +77,28 @@ State:
   m_ObjectHideFlags: 3
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: MP433@Idle
+  m_Name: Door@Open
   m_Speed: 1
   m_CycleOffset: 0
   m_Motions:
-  - {fileID: 7400000, guid: b26d57a7c3c74664bb90e0a6c9a4cacb, type: 2}
+  - {fileID: 7400000, guid: d9ac52a18ffe83f47af4f06a1c425b99, type: 2}
   m_ParentStateMachine: {fileID: 110700000}
-  m_Position: {x: 96, y: 24, z: 0}
+  m_Position: {x: 240, y: -12, z: 0}
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
---- !u!1102 &110206969
+--- !u!1102 &110247136
 State:
   m_ObjectHideFlags: 3
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: MP433@Fire
+  m_Name: Door@Closed
   m_Speed: 1
   m_CycleOffset: 0
   m_Motions:
-  - {fileID: 7400000, guid: 064fb81043d7c024fa3a34f0ead7d3fa, type: 2}
+  - {fileID: 7400000, guid: be17164ce2d98d74c928a2b1683039dd, type: 2}
   m_ParentStateMachine: {fileID: 110700000}
-  m_Position: {x: 96, y: -72, z: 0}
+  m_Position: {x: 240, y: 84, z: 0}
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
@@ -103,21 +109,21 @@ StateMachine:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Base Layer
-  m_DefaultState: {fileID: 110200000}
+  m_DefaultState: {fileID: 110247136}
   m_States:
   - {fileID: 110200000}
-  - {fileID: 110206969}
+  - {fileID: 110247136}
   m_ChildStateMachine: []
   m_ChildStateMachinePosition: []
   m_OrderedTransitions:
     data:
-      first: {fileID: 110200000}
+      first: {fileID: 110247136}
       second:
       - {fileID: 110100000}
     data:
-      first: {fileID: 110206969}
+      first: {fileID: 110200000}
       second:
-      - {fileID: 110113993}
+      - {fileID: 110135141}
   m_MotionSetCount: 1
-  m_AnyStatePosition: {x: -228, y: -60, z: 0}
+  m_AnyStatePosition: {x: 50, y: 20, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}

@@ -2252,7 +2252,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &100282
 GameObject:
   m_ObjectHideFlags: 1
@@ -4075,7 +4075,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100252}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.100000001, y: .189999998, z: .533999979}
+  m_LocalPosition: {x: .0320000015, y: .189999998, z: -1.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400222}
@@ -6384,11 +6384,15 @@ MonoBehaviour:
     currentTotalBullets: 0
     shootRange: 100
     timeBetweenBullets: .150000006
-    timeBetweenReload: 2
+    timeBetweenReload: 2.25
+    timeBeforeMagBackIn: .75
+    timeBeforeSpecialSound: 1.20000005
     aimLineDisplayTime: 1
     weaponType: 0
   weaponConfig:
-    reloadSound: {fileID: 8300000, guid: d17a019b246f50d4896793cd4401426f, type: 3}
+    reloadMagOutSound: {fileID: 8300000, guid: 45a7539a25f4f23409ce97b81011f1eb, type: 3}
+    reloadMagInSound: {fileID: 8300000, guid: d17a019b246f50d4896793cd4401426f, type: 3}
+    reloadThirdSound: {fileID: 8300000, guid: 4aac3bcae6e034241bae5e681862a57a, type: 3}
     fireSound: {fileID: 8300000, guid: 6a65739f10c50b543bd616071faad274, type: 3}
     drawSound: {fileID: 8300000, guid: 823b1883be03db44d9818e9d360af2aa, type: 3}
     fireParticle: {fileID: 19800000}
