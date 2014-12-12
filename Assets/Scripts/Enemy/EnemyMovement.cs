@@ -3,12 +3,14 @@ using System.Collections;
 
 public class EnemyMovement : MonoBehaviour
 {
-    public float speed = 2f;
+    public float speed = 9f;
+    public float gravity = 9.81f;
+    public float sightDistance = 1000f;
+
     public Transform[] waypoints;
     public Animator animator;
     public CharacterController controller;
     public GameObject player;
-    public float sightDistance = 1000f;
 
     private bool chasing = false;
     private int currentWayPointIndex;
@@ -27,9 +29,14 @@ public class EnemyMovement : MonoBehaviour
 
     private void chasePlayer()
     {
-        Vector3 moveDirection = player.transform.position - transform.position;
-
-        controller.Move(moveDirection.normalized * speed * Time.deltaTime);
+        //Calculate where our player is.
+        Vector3 movDiff = player.transform.position - transform.position;
+        //Movement speed calculation
+        Vector3 movDir = movDiff.normalized * speed * Time.deltaTime;
+        //Apply Gravity
+        movDir.y -= gravity;
+        //Move our enemy
+        controller.Move(movDir);
     }
 
     private void patrol()

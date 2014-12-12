@@ -56,6 +56,7 @@ public class WeaponManager : MonoBehaviour
 
     private void SelectWeapon()
     {
+        //TODO: Idle animations knife/MP433
         ActivateNextWeapon();
 
         WeaponCombat weaponCombat = currentWeapon.GetComponent<WeaponCombat>();

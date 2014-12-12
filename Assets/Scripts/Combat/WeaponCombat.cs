@@ -67,7 +67,6 @@ public class WeaponCombat : MonoBehaviour
             aimLine = shootParticle.GetComponent<LineRenderer>();
         }
         UpdateWeaponText();
-        //ResetTriggers();
     }
     // Update is called once per frame
     void Update()
@@ -114,8 +113,6 @@ public class WeaponCombat : MonoBehaviour
 
             AudioSource.PlayClipAtPoint(weaponConfig.fireSound, transform.position);
 
-            //ResetTriggers();
-            //animator.SetTrigger(GetWeaponShootTrigger());
             PlayShootAnimation();
 
             shootParticle.Play();
@@ -167,9 +164,7 @@ public class WeaponCombat : MonoBehaviour
             weapon.currentBulletsInMag += bulletsLeftInMag;
             weapon.currentTotalBullets -= bulletsLeftInMag;
 
-            //ResetTriggers();
             PlayReloadAnimation();
-            //animator.SetTrigger(GetWeaponReloadTrigger());
 
             //Delay updateText while reloading.
             yield return new WaitForSeconds(weapon.timeBetweenReload);
@@ -177,15 +172,8 @@ public class WeaponCombat : MonoBehaviour
         }
     }
 
-    private void ResetTriggers()
-    {
-        animator.ResetTrigger(GetWeaponDrawTrigger());
-        animator.ResetTrigger(GetWeaponReloadTrigger());
-        animator.ResetTrigger(GetWeaponDrawTrigger());
-    }
     public void DrawWeapon()
     {
-        //ResetTriggers();
         PlayDrawAnimation();
         AudioSource.PlayClipAtPoint(weaponConfig.drawSound, transform.position);
     }
