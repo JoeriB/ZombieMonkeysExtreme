@@ -45,10 +45,5 @@ public class EscapeMenu : MonoBehaviour
         player.GetComponent<MouseLook>().enabled = !pause;
         Camera.main.GetComponent<AudioListener>().enabled = !pause;
         player.GetComponentInChildren<WeaponCombat>().enabled = !pause;
-        WeaponCombat weapon = GameObject.FindGameObjectWithTag("Weapon").GetComponent<WeaponCombat>();
-        if (weapon != null)
-        {
-            weapon.enabled = !pause;
-        }
     }
 }

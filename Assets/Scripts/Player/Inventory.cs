@@ -1,0 +1,41 @@
+﻿using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.UI;
+
+public class Inventory : MonoBehaviour
+{
+
+    public GameObject inventoryUI;
+    public GameObject[] slots;
+
+    int counter;
+    // Use this for initialization
+    void Start()
+    {
+        slots = GameObject.FindGameObjectsWithTag("Slot");
+        UpdateGameText();
+    }
+
+    void UpdateGameText()
+    {
+        inventoryUI.GetComponentInChildren<Text>().text = "Inventory Items: " + counter + "/" + slots.Length + " Completed";
+    }
+
+    public void addItem(PickUpItem.Item item)
+    {
+        //Get current empty image.
+        Image image = slots[counter++].GetComponent<Image>();
+        //Add visibility to our new sprite.
+        image.color = new Color(255, 255, 255, 255);
+        //Add the sprite of the item.
+        image.sprite = item.sprite;
+        //Update the game text with our new item.
+        UpdateGameText();
+    }
+
+    public bool hasAllItems()
+    {
+        return counter >= slots.Length;
+    }
+}
