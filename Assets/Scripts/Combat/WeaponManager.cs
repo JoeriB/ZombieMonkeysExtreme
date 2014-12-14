@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 
+/**
+ * @Author: Joeri Boons
+ * @ZombieMonkeysExtreme Weapon Manager: Handles our switching and contains our weapon list
+ */
 public class WeaponManager : MonoBehaviour
 {
     [System.Serializable]
@@ -56,7 +59,7 @@ public class WeaponManager : MonoBehaviour
 
     private void SelectWeapon()
     {
-        //TODO: Idle animations knife/MP433
+        //TODO: Idle animations knife
         ActivateNextWeapon();
 
         WeaponCombat weaponCombat = currentWeapon.GetComponent<WeaponCombat>();

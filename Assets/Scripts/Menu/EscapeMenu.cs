@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/**
+ * @Author: Joeri Boons
+ * @ZombieMonkeysExtreme Escape Menu: Pauses the game
+ */
 public class EscapeMenu : MonoBehaviour
 {
 
@@ -35,14 +39,14 @@ public class EscapeMenu : MonoBehaviour
     {
         pause = !pause;
 
-        //Zet tijd op 0... + menu activeren en player HUD afzetten + cursor aanzetten
+        //Set time to 0 + Activate menu and Deactive Player HUD etc..
         Time.timeScale = (pause) ? 0.0f : 1.0f;
         pauseMenu.SetActive(pause);
         playerHUD.SetActive(!pause);
         Screen.lockCursor = !pause;
 
         //Scripts/AudioListener in/uitschakelen
-        player.GetComponent<MouseLook>().enabled = !pause;
+        player.GetComponent<FPSMouseMovement>().enabled = !pause;
         Camera.main.GetComponent<AudioListener>().enabled = !pause;
         player.GetComponentInChildren<WeaponCombat>().enabled = !pause;
     }

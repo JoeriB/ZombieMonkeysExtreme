@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/**
+ * @Author: Joeri Boons
+ * @ZombieMonkeysExtreme Main Menu
+ */
 public class MainMenu : MonoBehaviour
 {
     public GameObject mainMenu; 

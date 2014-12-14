@@ -2,6 +2,10 @@
 using UnityEngine.UI;
 using System.Collections;
 
+/**
+ * @Author: Joeri Boons
+ * @ZombieMonkeysExtreme Player Stats: Contains information about our player such as health, kills, infection etc..
+ */
 public class PlayerStats : MonoBehaviour
 {
     public int currentKills = 0;

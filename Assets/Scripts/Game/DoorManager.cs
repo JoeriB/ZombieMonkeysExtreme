@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System;
 
+/**
+ * @Author: Joeri Boons
+ * @ZombieMonkeysExtreme Door Manager: Handles how and when a door can be opened
+ */
 public class DoorManager : MonoBehaviour
 {
 

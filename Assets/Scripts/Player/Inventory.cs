@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine.UI;
+using System;
 
+/**
+ * @Author: Joeri Boons
+ * @ZombieMonkeysExtreme Inventory: This will contains our items 
+ */
 public class Inventory : MonoBehaviour
 {
 
@@ -20,6 +23,8 @@ public class Inventory : MonoBehaviour
     void UpdateGameText()
     {
         inventoryUI.GetComponentInChildren<Text>().text = "Inventory Items: " + counter + "/" + slots.Length + " Completed";
+        if (hasAllItems())
+            inventoryUI.GetComponentInChildren<Text>().text += Environment.NewLine + "Run towards the Safe house to win!";
     }
 
     public void addItem(PickUpItem.Item item)

@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/**
+ * @Author: Joeri Boons
+ * @ZombieMonkeysExtreme End Game: Checks if we can end the game. If true it will show the end game screen.
+ */
 public class EndGame : MonoBehaviour
 {
 

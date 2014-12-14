@@ -1,7 +1,11 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System;
 
+/**
+ * @Author: Joeri Boons
+ * @ZombieMonkeysExtreme Pick Up item: Contains an Item class with information about a certain item, such as Sprite and Description.
+ * This class will add an item to the players inventory.
+ */
 public class PickUpItem : MonoBehaviour
 {
     [Serializable]

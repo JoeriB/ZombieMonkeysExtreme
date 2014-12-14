@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/**
+ * @Author: Joeri Boons
+ * @ZombieMonkeysExtreme Crosshair
+ */
 public class Crosshair : MonoBehaviour
 {
     public GUIStyle style;

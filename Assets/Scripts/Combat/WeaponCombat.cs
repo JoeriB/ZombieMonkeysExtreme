@@ -3,6 +3,10 @@ using System.Collections;
 using UnityEngine.UI;
 using System;
 
+/**
+ * @Author: Joeri Boons
+ * @ZombieMonkeysExtreme Weapon Combat: Handles the combat system for all our weapons.
+ */
 public class WeaponCombat : MonoBehaviour
 {
     [Serializable]

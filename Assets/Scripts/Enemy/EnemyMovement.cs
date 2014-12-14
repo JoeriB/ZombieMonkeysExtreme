@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+/**
+ * @Author: Joeri Boons
+ * @ZombieMonkeysExtreme Enemy Movement: Handles our enemies moving/patrolling
+ */
 public class EnemyMovement : MonoBehaviour
 {
     public float speed = 9f;
@@ -17,6 +20,7 @@ public class EnemyMovement : MonoBehaviour
 
     void Start()
     {
+        //TODO: Animations, Work out patrolling, look at target when chasing.
         currentWayPointIndex = 0;
     }
     void Update()

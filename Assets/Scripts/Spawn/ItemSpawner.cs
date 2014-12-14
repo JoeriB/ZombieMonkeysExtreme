@@ -2,6 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 
+/**
+ * @Author: Joeri Boons
+ * @ZombieMonkeysExtreme Item Spawner: handles all the item spawning on the map
+ */
 public class ItemSpawner : MonoBehaviour, SpawnManager
 {
     public GameObject[] items;

@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/**
+ * @Author: Joeri Boons
+ * @ZombieMonkeysExtreme Enemy Spawner: Handles all the enemy zombie spawns
+ */
 public class EnemySpawner : MonoBehaviour, SpawnManager
 {
     public GameObject spawnPrefab;
