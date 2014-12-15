@@ -9961,7 +9961,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 3a778e80af0aab245b809cdd4c97529e, type: 2}
       propertyPath: m_Name
-      value: Knife - ANIMEREN
+      value: Knife
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 3a778e80af0aab245b809cdd4c97529e, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 3a778e80af0aab245b809cdd4c97529e, type: 2}
+      propertyPath: weapon.timeBetweenBullets
+      value: .800000012
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3a778e80af0aab245b809cdd4c97529e, type: 2}
@@ -34952,7 +34960,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &842654118
 Transform:
   m_ObjectHideFlags: 0
@@ -69522,12 +69530,12 @@ GameObject:
   - 95: {fileID: 1562932615}
   - 114: {fileID: 1562932614}
   m_Layer: 0
-  m_Name: Knife - ANIMEREN
+  m_Name: Knife
   m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1562932613
 Transform:
   m_ObjectHideFlags: 0
@@ -69561,7 +69569,7 @@ MonoBehaviour:
     currentBulletsInMag: 0
     currentTotalBullets: 0
     shootRange: 25
-    timeBetweenBullets: .25
+    timeBetweenBullets: .800000012
     timeBetweenReload: 0
     timeBeforeMagBackIn: 0
     timeBeforeSpecialSound: 0
@@ -70072,7 +70080,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100074, guid: 88cab255e1096644e863e545922f2e43, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9500000, guid: 88cab255e1096644e863e545922f2e43, type: 2}
       propertyPath: m_UpdateMode
