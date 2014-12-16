@@ -7,18 +7,8 @@ using System.Collections;
  */
 public class MainMenu : MonoBehaviour
 {
-    public GameObject mainMenu; 
+    public GameObject mainMenu;
     public GameObject characterSelect;
-    // Use this for initialization
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     public void ClickButton(string text)
     {
@@ -39,6 +29,7 @@ public class MainMenu : MonoBehaviour
     private void StartGame()
     {
         characterSelect.SetActive(true);
+        GetComponent<CharacterMenu>().InitiateSelectCharacter();
         mainMenu.SetActive(false);
     }
 }

@@ -50,13 +50,8 @@ public class WeaponCombat : MonoBehaviour
     float timer;
     float reloadTimer;
 
-
-    void Start()
+    public void Initiate()
     {
-        if (weapon.weaponType != WeaponType.KNIFE)
-        {
-            shootParticle = GetComponentInChildren<ParticleSystem>();
-        }
         weaponText = GameObject.FindGameObjectWithTag("WeaponText").GetComponent<Text>();
         weaponImage = GameObject.FindGameObjectWithTag("WeaponImage").GetComponent<Image>();
 
@@ -68,11 +63,13 @@ public class WeaponCombat : MonoBehaviour
 
         if (weapon.weaponType != WeaponType.KNIFE)
         {
-            aimLine = shootParticle.GetComponent<LineRenderer>();
+            GameObject particles = GameObject.FindGameObjectWithTag("GunParticle");
+            shootParticle = particles.GetComponent<ParticleSystem>();
+            aimLine = particles.GetComponent<LineRenderer>();
         }
         UpdateWeaponText();
     }
-    // Update is called once per frame
+
     void Update()
     {
         timer += Time.deltaTime;
@@ -88,8 +85,12 @@ public class WeaponCombat : MonoBehaviour
             {
                 StartCoroutine(Shoot());
             }
+            else
+            {
+                StartCoroutine(Knife());
+            }
         }
-        if (timer >= weapon.timeBetweenBullets * weapon.aimLineDisplayTime && weapon.weaponType != WeaponType.KNIFE)
+        if (aimLine != null && timer >= weapon.timeBetweenBullets * weapon.aimLineDisplayTime && weapon.weaponType != WeaponType.KNIFE)
         {
             aimLine.enabled = false;
         }
@@ -105,6 +106,33 @@ public class WeaponCombat : MonoBehaviour
     {
         yield return new WaitForSeconds(weapon.timeBeforeMagBackIn);
         AudioSource.PlayClipAtPoint(weaponConfig.reloadMagInSound, transform.position);
+    }
+    IEnumerator Reload()
+    {
+        if (weapon.currentTotalBullets > 0 && weapon.currentBulletsInMag < weapon.maxBulletsPerMag)
+        {
+            StartCoroutine(ReloadMagBackInSound());
+            if (weaponConfig.reloadThirdSound != null)
+            {
+                StartCoroutine(ReloadSpecialSound());
+            }
+
+            reloadTimer = 0f;
+            AudioSource.PlayClipAtPoint(weaponConfig.reloadMagOutSound, transform.position);
+
+            int bulletsLeftInMag = weapon.maxBulletsPerMag - weapon.currentBulletsInMag;
+            if (bulletsLeftInMag > weapon.currentTotalBullets)
+            {
+                bulletsLeftInMag = weapon.currentTotalBullets;
+            }
+            weapon.currentBulletsInMag += bulletsLeftInMag;
+            weapon.currentTotalBullets -= bulletsLeftInMag;
+
+            PlayReloadAnimation();
+
+            yield return new WaitForSeconds(weapon.timeBetweenReload);
+            UpdateWeaponText();
+        }
     }
 
     IEnumerator Shoot()
@@ -147,35 +175,29 @@ public class WeaponCombat : MonoBehaviour
         }
     }
 
-    IEnumerator Reload()
+    IEnumerator Knife()
     {
-        if (weapon.currentTotalBullets > 0 && weapon.currentBulletsInMag < weapon.maxBulletsPerMag)
+        if (timer >= weapon.timeBetweenBullets)
         {
-            StartCoroutine(ReloadMagBackInSound());
-            if (weaponConfig.reloadThirdSound != null)
+            timer = 0f;
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+
+            AudioSource.PlayClipAtPoint(weaponConfig.fireSound, transform.position);
+
+            PlayShootAnimation();
+            if (Physics.Raycast(ray, out hit, weapon.shootRange))
             {
-                StartCoroutine(ReloadSpecialSound());
+                EnemyStats enemy = hit.collider.GetComponent<EnemyStats>();
+                if (enemy != null)
+                {
+                    enemy.ApplyDamage(weapon.bulletDamage);
+                }
             }
-
-            reloadTimer = 0f;
-            AudioSource.PlayClipAtPoint(weaponConfig.reloadMagOutSound, transform.position);
-
-            int bulletsLeftInMag = weapon.maxBulletsPerMag - weapon.currentBulletsInMag;
-            if (bulletsLeftInMag > weapon.currentTotalBullets)
-            {
-                bulletsLeftInMag = weapon.currentTotalBullets;
-            }
-            weapon.currentBulletsInMag += bulletsLeftInMag;
-            weapon.currentTotalBullets -= bulletsLeftInMag;
-
-            PlayReloadAnimation();
-
-            //Delay updateText while reloading.
-            yield return new WaitForSeconds(weapon.timeBetweenReload);
             UpdateWeaponText();
         }
+        yield return new WaitForSeconds(weapon.timeBetweenBullets);
     }
-
     public void DrawWeapon()
     {
         PlayDrawAnimation();

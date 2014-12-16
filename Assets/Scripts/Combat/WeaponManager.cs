@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 /**
  * @Author: Joeri Boons
@@ -7,7 +8,7 @@ using System.Collections;
  */
 public class WeaponManager : MonoBehaviour
 {
-    [System.Serializable]
+    [Serializable]
     public class Switch
     {
         public bool canSwitch = false;
@@ -20,9 +21,9 @@ public class WeaponManager : MonoBehaviour
     public int currentWeaponIndex = 0;
     public GameObject currentWeapon;
 
-    void Start()
+    public void Initiate()
     {
-        ActivateNextWeapon();
+        SelectWeapon();
     }
 
     // Update is called once per frame
@@ -59,10 +60,10 @@ public class WeaponManager : MonoBehaviour
 
     private void SelectWeapon()
     {
-        //TODO: Idle animations knife
         ActivateNextWeapon();
 
         WeaponCombat weaponCombat = currentWeapon.GetComponent<WeaponCombat>();
+        weaponCombat.Initiate();
         weaponCombat.DrawWeapon();
         weaponCombat.UpdateWeaponText();
 

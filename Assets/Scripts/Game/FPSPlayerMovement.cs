@@ -10,9 +10,9 @@ using System.Collections;
 public class FPSPlayerMovement : MonoBehaviour
 {
     //Speed when walking
-    public float walkSpeed = 7f;
+    public float walkSpeed = 5f;
     //Speed when crouching
-    public float crouchSpeed = 5f;
+    public float crouchSpeed = 3f;
     //Speed when running
     public float runSpeed = 10f;
     //How high we can jump

@@ -13,8 +13,8 @@ public class Inventory : MonoBehaviour
     public GameObject[] slots;
 
     int counter;
-    // Use this for initialization
-    void Start()
+
+    public void Initiate()
     {
         slots = GameObject.FindGameObjectsWithTag("Slot");
         UpdateGameText();
