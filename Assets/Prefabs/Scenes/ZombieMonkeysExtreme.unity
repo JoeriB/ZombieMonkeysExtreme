@@ -7808,7 +7808,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &188404667
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15304,7 +15304,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &358817735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32415,7 +32415,7 @@ RectTransform:
   m_AnchorMin: {x: .5, y: 0}
   m_AnchorMax: {x: .5, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 248, y: 0}
+  m_SizeDelta: {x: 408, y: 0}
   m_Pivot: {x: .5, y: .5}
 --- !u!1 &753966407
 GameObject:
@@ -37485,7 +37485,7 @@ Prefab:
     - target: {fileID: 11400000, guid: e8afeb7f6c485464280915fd302b9fd6, type: 2}
       propertyPath: weaponConfig.weaponSprite
       value: 
-      objectReference: {fileID: 21300000, guid: bdbbd5b3190ef5443b5a902041aadd97,
+      objectReference: {fileID: 21300000, guid: 8e7b029177a97964c872dff4452a2144,
         type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e8afeb7f6c485464280915fd302b9fd6, type: 2}
@@ -37765,7 +37765,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 308, y: 0}
+  m_SizeDelta: {x: 570, y: 0}
   m_Pivot: {x: 1, y: .5}
 --- !u!114 &895708944
 MonoBehaviour:
@@ -38463,7 +38463,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 380, y: 0}
+  m_SizeDelta: {x: 570, y: 0}
   m_Pivot: {x: 0, y: .5}
 --- !u!114 &910312922
 MonoBehaviour:
@@ -47025,7 +47025,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1084301184
 Transform:
   m_ObjectHideFlags: 0
@@ -53261,7 +53261,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 16
@@ -55109,7 +55109,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 380, y: 0}
+  m_SizeDelta: {x: 570, y: 0}
   m_Pivot: {x: 1, y: .5}
 --- !u!114 &1246823719
 MonoBehaviour:
@@ -67371,7 +67371,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 308, y: 0}
+  m_SizeDelta: {x: 570, y: 0}
   m_Pivot: {x: 0, y: .5}
 --- !u!114 &1510449612
 MonoBehaviour:
@@ -80768,10 +80768,10 @@ RectTransform:
   - {fileID: 416012648}
   m_Father: {fileID: 188404667}
   m_RootOrder: 2
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: .5, y: 0}
+  m_AnchorMax: {x: .5, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -616, y: 0}
+  m_SizeDelta: {x: 408, y: 0}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1782990267
 MonoBehaviour:
@@ -85258,7 +85258,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1859902723
 RectTransform:
   m_ObjectHideFlags: 0
@@ -88246,7 +88246,7 @@ MonoBehaviour:
     fireSound: {fileID: 8300000, guid: 6a65739f10c50b543bd616071faad274, type: 3}
     drawSound: {fileID: 8300000, guid: 823b1883be03db44d9818e9d360af2aa, type: 3}
     fireParticle: {fileID: 1760745104}
-    weaponSprite: {fileID: 21300000, guid: bdbbd5b3190ef5443b5a902041aadd97, type: 3}
+    weaponSprite: {fileID: 21300000, guid: 8e7b029177a97964c872dff4452a2144, type: 3}
   animator: {fileID: 1951714228}
 --- !u!1 &1951985956
 GameObject:
