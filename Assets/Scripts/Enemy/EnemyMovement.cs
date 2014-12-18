@@ -1,34 +1,49 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 /**
  * @Author: Joeri Boons
  * @ZombieMonkeysExtreme Enemy Movement: Handles our enemies moving/patrolling
  */
 public class EnemyMovement : MonoBehaviour
 {
-    public float speed = 9f;
-    public float gravity = 9.81f;
-    public float sightDistance = 1000f;
+    [Serializable]
+    public class Patrol
+    {
+        public float patrolRadius;
+        public Transform patrolPoint;
+    }
+    [Serializable]
+    public class Movement
+    {
+        public float patrolSpeed;
+        public float chaseSpeed;
+        public float gravity;
+    }
+    public float sightDistance;
 
-    public Transform[] waypoints;
+    public Patrol patrol;
+    public Movement movement;
     public Animator animator;
-    public CharacterController controller;
-    public GameObject player;
 
+    private CharacterController controller;
+    private GameObject player;
     private bool chasing = false;
-    private int currentWayPointIndex;
+    private Vector3 randomPatrolPoint;
 
     void Start()
     {
+        controller = GetComponent<CharacterController>();
+        player = GameObject.FindGameObjectWithTag("Player");
+        randomPatrolPoint = patrol.patrolPoint.position + UnityEngine.Random.insideUnitSphere * patrol.patrolRadius;
         //TODO: Animations, Work out patrolling, look at target when chasing.
-        currentWayPointIndex = 0;
     }
     void Update()
     {
         if (!chasing)
-            patrol();
-        else
-            chasePlayer();
+            patrolArea();
+        //else
+        //    chasePlayer();
     }
 
     private void chasePlayer()
@@ -36,30 +51,30 @@ public class EnemyMovement : MonoBehaviour
         //Calculate where our player is.
         Vector3 movDiff = player.transform.position - transform.position;
         //Movement speed calculation
-        Vector3 movDir = movDiff.normalized * speed * Time.deltaTime;
+        Vector3 movDir = movDiff.normalized * movement.chaseSpeed * Time.deltaTime;
         //Apply Gravity
-        movDir.y -= gravity;
+        movDir.y -= movement.gravity;
         //Move our enemy
         controller.Move(movDir);
     }
 
-    private void patrol()
+    private void patrolArea()
     {
-        Vector3 target = waypoints[currentWayPointIndex].position;
-        Vector3 moveDirection = target - transform.position;
-        if (moveDirection.magnitude < 0.5)
+        Vector3 target = randomPatrolPoint - transform.position;
+        Debug.Log(target);
+
+        Vector3 moveDirection = target.normalized;
+
+        moveDirection *= movement.patrolSpeed;
+        moveDirection.y -= movement.gravity;
+
+
+        if (target.x < 0.5 && target.z < 0.5)
         {
-            transform.position = target;
-            currentWayPointIndex++;
+            Debug.Log("nieuwe patrol point");
+            randomPatrolPoint = patrol.patrolPoint.position + UnityEngine.Random.insideUnitSphere * patrol.patrolRadius;
         }
         else
-        {
-            controller.Move(moveDirection.normalized * speed * Time.deltaTime);
-            //animator.SetFloat("Speed", speed);
-        }
-        if (currentWayPointIndex >= waypoints.Length)
-        {
-            currentWayPointIndex = 0;
-        }
+            controller.Move(moveDirection * Time.deltaTime);
     }
 }
