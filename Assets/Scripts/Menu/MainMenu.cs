@@ -10,26 +10,20 @@ public class MainMenu : MonoBehaviour
     public GameObject mainMenu;
     public GameObject characterSelect;
 
-    public void ClickButton(string text)
-    {
-        if (text.Equals("start"))
-        {
-            StartGame();
-        }
-        if (text.Equals("credits"))
-        {
-            //TODO: credits
-        }
-        if (text.Equals("quit"))
-        {
-            Application.Quit();
-        }
-    }
-
-    private void StartGame()
+    public void StartGame()
     {
         characterSelect.SetActive(true);
         GetComponent<CharacterMenu>().InitiateSelectCharacter();
         mainMenu.SetActive(false);
+    }
+
+    public void ShowOptions()
+    {
+        //TODO: Options
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }

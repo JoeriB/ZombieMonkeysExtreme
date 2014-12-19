@@ -6,7 +6,7 @@ using System;
 public class CharacterMenu : MonoBehaviour
 {
 
-    public GameObject[] objects;
+    public GameObject[] needToBeActivatedOnStart;
 
     private GameObject characterDetails;
     private GameObject selectedCharacter;
@@ -25,15 +25,15 @@ public class CharacterMenu : MonoBehaviour
     {
         if (selectedCharacter != null)
         {
-            Debug.Log("Starting game..");
-            foreach (GameObject activate in objects)
+            foreach (GameObject activationObject in needToBeActivatedOnStart)
             {
-                activate.SetActive(true);
-                Debug.Log(activate.name);
-                if (activate.tag == "Player")
+                activationObject.SetActive(true);
+                Debug.Log(activationObject.name);
+                if (activationObject.tag == "Player")
                 {
-                    activate.GetComponentInChildren<WeaponManager>().Initiate();
-                    activate.GetComponent<Inventory>().Initiate();
+                    activationObject.GetComponent<FPSPlayerMovement>().ApplyCharacterDetails(selectedCharacter.GetComponent<CharacterDetails>());
+                    activationObject.GetComponentInChildren<WeaponManager>().Initiate();
+                    activationObject.GetComponent<Inventory>().Initiate();
                 }
             }
             GameObject.FindGameObjectWithTag("CharacterSelect").SetActive(false);

@@ -7,6 +7,7 @@ using System.Collections;
  */
 
 [RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(FPSMouseMovement))]
 public class FPSPlayerMovement : MonoBehaviour
 {
     //Speed when walking
@@ -81,5 +82,12 @@ public class FPSPlayerMovement : MonoBehaviour
 
         //Make you stand up after crouch
         transform.position = position;
+    }
+
+    public void ApplyCharacterDetails(CharacterDetails details)
+    {
+        walkSpeed = details.walkSpeed;
+        crouchSpeed = details.crouchSpeed;
+        runSpeed = details.runSpeed;
     }
 }

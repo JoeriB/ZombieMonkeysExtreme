@@ -5,6 +5,8 @@ using System;
  * @Author: Joeri Boons
  * @ZombieMonkeysExtreme Enemy Movement: Handles our enemies moving/patrolling
  */
+[RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(EnemyCombat))]
 public class EnemyMovement : MonoBehaviour
 {
     [Serializable]
@@ -18,9 +20,10 @@ public class EnemyMovement : MonoBehaviour
     {
         public float patrolSpeed;
         public float chaseSpeed;
+        public float rotationSpeed;
         public float gravity;
     }
-    public float sightDistance;
+    public float chaseDistance;
 
     public Patrol patrol;
     public Movement movement;
@@ -28,30 +31,43 @@ public class EnemyMovement : MonoBehaviour
 
     private CharacterController controller;
     private GameObject player;
-    private bool chasing = false;
     private Vector3 randomPatrolPoint;
+    private EnemyCombat combat;
 
     void Start()
     {
+        //Character Controller
         controller = GetComponent<CharacterController>();
+        //Our Player
         player = GameObject.FindGameObjectWithTag("Player");
+        //Our Enemy Combat script
+        combat = GetComponent<EnemyCombat>();
+        //Random Patrol point to start with
         randomPatrolPoint = patrol.patrolPoint.position + UnityEngine.Random.insideUnitSphere * patrol.patrolRadius;
-        //TODO: Animations, Work out patrolling, look at target when chasing.
+        //TODO: Animations: RUN ANIM/CHASE ANIMS/ATTACK ANIMS/MAKE SURE THEY CAN ATTACK BACK
+        //TODO: Add clock to the game... 
+        //TODO: Complete Cleanup + scripts nakijken/commentaar/end screen
+        //TODO: Have fun! VRIJDAG vragen of dit model goed genoeg is
     }
     void Update()
     {
-        if (!chasing)
+        float distance = Vector3.Distance(player.transform.position, transform.position);
+        if (distance <= chaseDistance)
+            chasePlayer();
+        if (distance <= combat.enemy.attackDistance)
+            combat.HandleCombat();
+        else
             patrolArea();
-        //else
-        //    chasePlayer();
     }
 
     private void chasePlayer()
     {
         //Calculate where our player is.
-        Vector3 movDiff = player.transform.position - transform.position;
+        Vector3 target = player.transform.position - transform.position;
+        //Look at Player
+        transform.rotation = LookAtTarget(target);
         //Movement speed calculation
-        Vector3 movDir = movDiff.normalized * movement.chaseSpeed * Time.deltaTime;
+        Vector3 movDir = target.normalized * movement.chaseSpeed * Time.deltaTime;
         //Apply Gravity
         movDir.y -= movement.gravity;
         //Move our enemy
@@ -60,21 +76,34 @@ public class EnemyMovement : MonoBehaviour
 
     private void patrolArea()
     {
+        //Get the target vector
         Vector3 target = randomPatrolPoint - transform.position;
-        Debug.Log(target);
-
+        //Look at patrol point
+        transform.rotation = LookAtTarget(target);
+        //Movement direction to calculate our movement
         Vector3 moveDirection = target.normalized;
-
+        //Adjust the right speed for patrolling
         moveDirection *= movement.patrolSpeed;
+        //Apply gravity
         moveDirection.y -= movement.gravity;
-
-
+        //Magnitude is fucking up somehow so use this to determinate when a new patrol point is needed!
         if (target.x < 0.5 && target.z < 0.5)
         {
-            Debug.Log("nieuwe patrol point");
             randomPatrolPoint = patrol.patrolPoint.position + UnityEngine.Random.insideUnitSphere * patrol.patrolRadius;
         }
+        //Move enemy
         else
             controller.Move(moveDirection * Time.deltaTime);
+    }
+
+    /**
+     * Look at a target, this method will rotate our enemy towards a target with a smooth movement.
+     */
+    private Quaternion LookAtTarget(Vector3 target)
+    {
+        var newRotation = Quaternion.LookRotation(target);
+        newRotation.x = 0;
+        newRotation.z = 0;
+        return Quaternion.Slerp(transform.rotation, newRotation, movement.rotationSpeed * Time.deltaTime);
     }
 }

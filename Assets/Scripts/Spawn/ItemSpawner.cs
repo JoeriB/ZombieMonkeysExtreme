@@ -20,7 +20,6 @@ public class ItemSpawner : MonoBehaviour, SpawnManager
         {
             SpawnObject(item);
         }
-        Debug.Log("Spawned " + counter + " Items..");
     }
 
     public void SpawnObject(GameObject spawnObject)

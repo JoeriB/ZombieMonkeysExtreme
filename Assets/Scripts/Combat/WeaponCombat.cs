@@ -128,7 +128,7 @@ public class WeaponCombat : MonoBehaviour
             weapon.currentBulletsInMag += bulletsLeftInMag;
             weapon.currentTotalBullets -= bulletsLeftInMag;
 
-            PlayReloadAnimation();
+            PlayAnimation(GetWeaponReloadTrigger());
 
             yield return new WaitForSeconds(weapon.timeBetweenReload);
             UpdateWeaponText();
@@ -145,7 +145,7 @@ public class WeaponCombat : MonoBehaviour
 
             AudioSource.PlayClipAtPoint(weaponConfig.fireSound, transform.position);
 
-            PlayShootAnimation();
+            PlayAnimation(GetWeaponShootTrigger());
 
             shootParticle.Play();
             aimLine.enabled = true;
@@ -153,11 +153,9 @@ public class WeaponCombat : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, weapon.shootRange))
             {
-                EnemyStats enemy = hit.collider.GetComponent<EnemyStats>();
+                EnemyCombat enemy = hit.collider.GetComponent<EnemyCombat>();
                 if (enemy != null)
-                {
-                    enemy.ApplyDamage(weapon.bulletDamage);
-                }
+                    enemy.HandleIncomingDamage(weapon.bulletDamage);
                 aimLine.SetPosition(1, hit.point);
             }
             else
@@ -185,14 +183,12 @@ public class WeaponCombat : MonoBehaviour
 
             AudioSource.PlayClipAtPoint(weaponConfig.fireSound, transform.position);
 
-            PlayShootAnimation();
+            PlayAnimation(GetWeaponShootTrigger());
             if (Physics.Raycast(ray, out hit, weapon.shootRange))
             {
-                EnemyStats enemy = hit.collider.GetComponent<EnemyStats>();
+                EnemyCombat enemy = hit.collider.GetComponent<EnemyCombat>();
                 if (enemy != null)
-                {
-                    enemy.ApplyDamage(weapon.bulletDamage);
-                }
+                    enemy.HandleIncomingDamage(weapon.bulletDamage);
             }
             UpdateWeaponText();
         }
@@ -200,20 +196,21 @@ public class WeaponCombat : MonoBehaviour
     }
     public void DrawWeapon()
     {
-        PlayDrawAnimation();
+        PlayAnimation(GetWeaponDrawTrigger());
         AudioSource.PlayClipAtPoint(weaponConfig.drawSound, transform.position);
     }
     public void UpdateWeaponText()
     {
-        if (weaponText != null)
-        {
-            weaponText.text = name + Environment.NewLine;
-            if (weapon.weaponType != WeaponType.KNIFE)
-            {
-                weaponText.text += "Ammo: " + weapon.currentBulletsInMag + "/" + weapon.currentTotalBullets;
-            }
-            weaponImage.sprite = weaponConfig.weaponSprite;
-        }
+        weaponText.text = name + Environment.NewLine;
+        if (weapon.weaponType != WeaponType.KNIFE)
+            weaponText.text += "Ammo: " + weapon.currentBulletsInMag + "/" + weapon.currentTotalBullets;
+
+        weaponImage.sprite = weaponConfig.weaponSprite;
+    }
+    public void PlayAnimation(int animationHash)
+    {
+        if (!animator.GetCurrentAnimatorStateInfo(0).nameHash.Equals(animationHash))
+            animator.SetTrigger(animationHash);
     }
 
     private int GetWeaponShootTrigger()
@@ -224,25 +221,8 @@ public class WeaponCombat : MonoBehaviour
     {
         return Animator.StringToHash("Reload");
     }
-
     private int GetWeaponDrawTrigger()
     {
         return Animator.StringToHash("Draw");
-    }
-
-    public void PlayDrawAnimation()
-    {
-        if (!animator.GetCurrentAnimatorStateInfo(0).nameHash.Equals(GetWeaponDrawTrigger()))
-            animator.SetTrigger(GetWeaponDrawTrigger());
-    }
-    public void PlayReloadAnimation()
-    {
-        if (!animator.GetCurrentAnimatorStateInfo(0).nameHash.Equals(GetWeaponReloadTrigger()))
-            animator.SetTrigger(GetWeaponReloadTrigger());
-    }
-    public void PlayShootAnimation()
-    {
-        if (!animator.GetCurrentAnimatorStateInfo(0).nameHash.Equals(GetWeaponShootTrigger()))
-            animator.SetTrigger(GetWeaponShootTrigger());
     }
 }
