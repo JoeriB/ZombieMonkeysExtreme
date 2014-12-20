@@ -20,6 +20,9 @@ TagManager:
   - EnemyManager
   - ItemManager
   - CharacterSelect
+  - Canvas
+  - GameTimeText
+  - Wall
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

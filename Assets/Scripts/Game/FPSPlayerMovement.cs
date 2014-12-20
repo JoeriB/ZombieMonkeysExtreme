@@ -21,7 +21,7 @@ public class FPSPlayerMovement : MonoBehaviour
     //Gravity
     public float gravity = 20f;
     //Crouch Radius for height adjustment
-    public float crouchHeight = 0.5f;
+    public float crouchHeight;
     //How smooth is the transition between standing up/crouching
     public float crouchSmoothness = 10f;
 
@@ -32,56 +32,40 @@ public class FPSPlayerMovement : MonoBehaviour
     //Our current speed;
     private float speed;
     //initial character controller radius:
-    private float initialRadius;
+    private bool bounce;
 
     void Start()
     {
         controller = GetComponent<CharacterController>();
-        initialRadius = controller.radius;
-    }
-
-    void FixedUpdate()
-    {
-        float inputX = Input.GetAxis("Horizontal");
-        float inputY = Input.GetAxis("Vertical");
-
-        if (controller.isGrounded)
-        {
-            moveDirection = new Vector3(inputX, 0, inputY);
-            moveDirection = transform.TransformDirection(moveDirection);
-            moveDirection *= speed;
-            if (Input.GetButton("Jump"))
-            {
-                moveDirection.y += jumpHeight * 10;
-            }
-        }
-        moveDirection.y -= gravity * Time.deltaTime;
-        controller.Move(moveDirection * Time.deltaTime);
     }
 
     void Update()
     {
-        var radius = initialRadius;
-        speed = (Input.GetButton("Walk")) ? walkSpeed : runSpeed;
-        //Check for crouching
-        if (Input.GetButton("Crouch"))
-        {
-            speed = crouchSpeed;
-            radius = crouchHeight;
-        }
-        //Take your last radius
-        var lastRadius = controller.radius;
-        //Adjust the character controller radius for crouching
-        controller.radius = Mathf.Lerp(controller.radius, radius, crouchSmoothness * Time.deltaTime);
-        //take current position to alter it later.
-        var position = transform.position;
-        //Use this calculation to prevent from falling through the floor ... -.-
-        var calculateDifference = (controller.radius - lastRadius) / 2;
-        if (calculateDifference > 0)
-            position.y += calculateDifference;
+        float inputX = Input.GetAxis("Horizontal");
+        float inputY = Input.GetAxis("Vertical");
 
-        //Make you stand up after crouch
-        transform.position = position;
+
+        if (controller.isGrounded)
+        {
+            if (Input.GetButton("Crouch"))
+            {
+            }
+            speed = (Input.GetButton("Walk")) ? walkSpeed : runSpeed;
+
+            moveDirection = new Vector3(inputX, 0, inputY);
+            moveDirection = transform.TransformDirection(moveDirection);
+            moveDirection *= speed;
+
+            if (Input.GetButton("Jump"))
+            {
+                Debug.Log("Jumping");
+                moveDirection.y = jumpHeight;
+            }
+        }
+        moveDirection.y -= gravity * Time.deltaTime;
+        controller.Move(moveDirection * Time.deltaTime);
+
+
     }
 
     public void ApplyCharacterDetails(CharacterDetails details)
@@ -91,3 +75,21 @@ public class FPSPlayerMovement : MonoBehaviour
         runSpeed = details.runSpeed;
     }
 }
+//var lastHeight = controller.height;
+//controller.height = Mathf.Lerp(controller.height, currentHeight, crouchSmoothness * Time.deltaTime);
+//var position = transform.position;
+//position.y = (controller.height - lastHeight) / 2;
+
+//transform.position = position;
+//take your last radius
+//var lastradius = controller.radius;
+////adjust the character controller radius for crouching
+//controller.radius = Mathf.Lerp(controller.radius, radius, crouchSmoothness * Time.deltaTime);
+////take current position to alter it later.
+//var position = transform.position;
+////use this calculation to prevent from falling through the floor ... -.-
+//var calculatedifference = (controller.radius - lastradius) / 2;
+//if (calculatedifference > 0)
+//    position.y += calculatedifference;
+////make you stand up after crouch
+//transform.position = position;

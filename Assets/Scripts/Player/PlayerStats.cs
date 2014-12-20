@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System;
 
 /**
  * @Author: Joeri Boons
@@ -14,12 +15,23 @@ public class PlayerStats : MonoBehaviour
     public Text playerHealthText;
     public Text playerKillsText;
 
+    private float timeLeft;
+    private Text gameTimeText;
     // Use this for initialization
     void Start()
     {
         currentHealth = playerHealth;
         playerHealthText.text = currentHealth + "/" + playerHealth;
         playerKillsText.text = "Kill Score: " + currentKills;
+        gameTimeText = GameObject.FindGameObjectWithTag("GameTimeText").GetComponent<Text>();
+    }
+
+    void Update()
+    {
+        timeLeft += Time.deltaTime;
+        TimeSpan ts = TimeSpan.FromSeconds(timeLeft);
+
+        gameTimeText.text = string.Format("Game Time: {0:D2}:{1:D2}", ts.Minutes, ts.Seconds);
     }
 
     //Script oproepen in npc combat.
