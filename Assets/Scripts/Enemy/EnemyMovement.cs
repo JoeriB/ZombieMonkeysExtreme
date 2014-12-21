@@ -53,11 +53,19 @@ public class EnemyMovement : MonoBehaviour
     {
         float distance = Vector3.Distance(player.transform.position, transform.position);
         if (distance <= chaseDistance && distance > combat.enemy.attackDistance)
+        {
             chasePlayer();
+            PlayAnimation(Animator.StringToHash("Chase"));
+        }
         if (distance <= combat.enemy.attackDistance)
+        {
             combat.HandleCombat();
+        }
         if (distance > chaseDistance)
+        {
             patrolArea();
+            PlayAnimation(Animator.StringToHash("Walk"));
+        }
     }
 
     private void chasePlayer()
@@ -72,7 +80,6 @@ public class EnemyMovement : MonoBehaviour
         movDir.y -= movement.gravity;
         //Move our enemy
         controller.Move(movDir);
-        PlayAnimation(Animator.StringToHash("Chase"));
     }
 
     private void patrolArea()
@@ -96,7 +103,6 @@ public class EnemyMovement : MonoBehaviour
         else
         {
             controller.Move(moveDirection * Time.deltaTime);
-            PlayAnimation(Animator.StringToHash("Walk"));
         }
     }
 

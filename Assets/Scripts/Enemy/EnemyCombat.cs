@@ -16,29 +16,40 @@ public class EnemyCombat : MonoBehaviour
     public class EnemyStats
     {
         public int maxHealth;
+        public int attackDamage;
         public float attackDistance;
+        public float attackCooldown;
         public EnemyAttackStyle attackStyle;
     }
     public EnemyStats enemy;
     public SoundConfig sounds;
 
     private int currentHealth;
-    private GameObject player;
+    private PlayerStats player;
+    private float cooldownTimer;
 
     void Start()
     {
         currentHealth = enemy.maxHealth;
-        player = GameObject.FindGameObjectWithTag(TagManager.player);
+        player = GameObject.FindGameObjectWithTag(TagManager.player).GetComponent<PlayerStats>();
     }
 
+    void Update()
+    {
+        cooldownTimer += Time.deltaTime;
+    }
     public void HandleCombat()
     {
-        //Todo: Gooien met items? Melee systeem? Depends on zombie Type
-        if (enemy.attackStyle == EnemyAttackStyle.MELEE)
-            Debug.Log("DO Melee stuff");
-        if (enemy.attackStyle == EnemyAttackStyle.RANGED)
-            Debug.Log("Ranged stuff throw stuff");
-        Debug.Log(player);
+        if (cooldownTimer >= enemy.attackCooldown && !player.isPlayerDead())
+        {
+            cooldownTimer = 0f;
+            //Todo: Gooien met items? Melee systeem? Depends on zombie Type
+            if (enemy.attackStyle == EnemyAttackStyle.MELEE)
+                Debug.Log("DO Melee stuff");
+            if (enemy.attackStyle == EnemyAttackStyle.RANGED)
+                Debug.Log("Ranged stuff throw stuff");
+            player.HandleIncomingDamage(enemy.attackDamage);
+        }
     }
 
     public void HandleIncomingDamage(int damage)

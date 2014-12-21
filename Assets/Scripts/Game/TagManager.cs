@@ -31,4 +31,6 @@ public class TagManager : MonoBehaviour
     public const string playerKillsText = "PlayerKillsText";
     public const string uiMonkeys = "UIMonkey";
     public const string uiPanel = "UIPanel";
+    public const string playerHealthBar = "PlayerHealthBar";
+    public const string deathScreen = "DeathScreen";
 }

@@ -11,8 +11,8 @@ public class EndGame : MonoBehaviour
     public DoorManager endGameDoor;
     public GameObject player;
 
-    bool canEndGame;
-    Inventory inventory;
+    private bool canEndGame;
+    private Inventory inventory;
 
     void Start()
     {
@@ -24,8 +24,7 @@ public class EndGame : MonoBehaviour
         if (canEndGame && !endGameDoor.isDoorOpen())
         {
             if (inventory.hasAllItems())
-                //TODO: Nieuw scherm met all end game statistis! gewoon zwart en rustig naar beneden laten gaan met animations?
-                Debug.Log("Ending game; Show End Game Statistics");
+                EndGame();
             else
                 Debug.Log("You need more items...");
         }
@@ -40,5 +39,13 @@ public class EndGame : MonoBehaviour
     {
         if (collider.tag.Equals("Player"))
             canEndGame = true;
+    }
+
+    public void EndGame()
+    {
+        if (player != null)
+        {
+
+        }
     }
 }

@@ -10,22 +10,36 @@ using System;
 public class PlayerStats : MonoBehaviour
 {
     public int currentKills = 0;
-    public int playerHealth = 100;
+    public int maxHealth = 100;
     public int currentHealth = 0;
+    public float deathDelay;
 
     private Text playerKillsText;
     private Text playerHealthText;
-    private float timeLeft;
     private Text gameTimeText;
+
+    private Slider playerHealthBarSlider;
+
+    private GameObject uiPanel;
+    private GameObject deathScreen;
+
+    private float timeLeft;
+    private bool isDead = false;
+
+    private Animator animator;
+    private EndGame endGame;
 
     void Start()
     {
         playerHealthText = GameObject.FindGameObjectWithTag(TagManager.playerHealthText).GetComponent<Text>();
         gameTimeText = GameObject.FindGameObjectWithTag(TagManager.gameTimeText).GetComponent<Text>();
         playerKillsText = GameObject.FindGameObjectWithTag(TagManager.playerKillsText).GetComponent<Text>();
+        playerHealthBarSlider = GameObject.FindGameObjectWithTag(TagManager.playerHealthBar).GetComponent<Slider>();
+        uiPanel = GameObject.FindGameObjectWithTag(TagManager.uiPanel);
+        animator = GetComponent<Animator>();
 
-        currentHealth = playerHealth;
-        playerHealthText.text = currentHealth + "/" + playerHealth;
+        currentHealth = maxHealth;
+        playerHealthText.text = currentHealth + "/" + maxHealth;
         playerKillsText.text = "Kill Score: " + currentKills;
     }
 
@@ -41,5 +55,26 @@ public class PlayerStats : MonoBehaviour
     {
         currentKills++;
         playerKillsText.text = "Kill Score: " + currentKills;
+    }
+
+    public void HandleIncomingDamage(int damage)
+    {
+        if (!isPlayerDead())
+        {
+            currentHealth -= damage;
+            playerHealthText.text = currentHealth + "/" + maxHealth;
+            playerHealthBarSlider.value = currentHealth;
+            animator.SetTrigger(Animator.StringToHash("Hurt"));
+        }
+        if (currentHealth <= 0)
+        {
+            isDead = true;
+            endGame.EndGame();
+        }
+    }
+
+    public bool isPlayerDead()
+    {
+        return isDead;
     }
 }
