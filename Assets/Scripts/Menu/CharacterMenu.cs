@@ -2,7 +2,11 @@
 using System.Collections;
 using UnityEngine.UI;
 using System;
-
+using System.Collections.Generic;
+/**
+ * @Author: Joeri Boons
+ * @ZombieMonkeysExtreme Character Menu: Pick your character for game. This will also start up a new game.
+ */
 public class CharacterMenu : MonoBehaviour
 {
 
@@ -13,7 +17,7 @@ public class CharacterMenu : MonoBehaviour
 
     public void InitiateSelectCharacter()
     {
-        characterDetails = GameObject.FindGameObjectWithTag("CharacterDetails");
+        characterDetails = GameObject.FindGameObjectWithTag(TagManager.characterDetails);
     }
     public void SelectCharacter(GameObject character)
     {
@@ -29,14 +33,27 @@ public class CharacterMenu : MonoBehaviour
             {
                 activationObject.SetActive(true);
                 Debug.Log(activationObject.name);
-                if (activationObject.tag == "Player")
+                if (activationObject.tag.Equals(TagManager.player))
                 {
                     activationObject.GetComponent<FPSPlayerMovement>().ApplyCharacterDetails(selectedCharacter.GetComponent<CharacterDetails>());
                     activationObject.GetComponentInChildren<WeaponManager>().Initiate();
                     activationObject.GetComponent<Inventory>().Initiate();
                 }
             }
-            GameObject.FindGameObjectWithTag("CharacterSelect").SetActive(false);
+            GameObject.FindGameObjectWithTag(TagManager.characterSelect).SetActive(false);
+            //Only active our escape menu when we are in game..
+            EscapeMenu escMenu = GetComponent<EscapeMenu>();
+            escMenu.enabled = true;
+            escMenu.Instantiate();
+
+
+            GameObject[] uiMonkeyList = GameObject.FindGameObjectsWithTag(TagManager.uiMonkeys);
+            foreach (GameObject monkey in uiMonkeyList)
+            {
+                monkey.SetActive(false);
+            }
+            GameObject.FindGameObjectWithTag(TagManager.escapeMenu).SetActive(false);
+            GameObject.FindGameObjectWithTag(TagManager.uiPanel).GetComponent<Image>().color = new Color(0, 0, 0, 0);
         }
     }
 }

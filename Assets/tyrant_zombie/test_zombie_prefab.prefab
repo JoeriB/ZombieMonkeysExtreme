@@ -9,7 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400000}
   m_Layer: 0
-  m_Name: Bone_003_R_017
+  m_Name: Right Lower Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -84,7 +84,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400010}
   m_Layer: 0
-  m_Name: Bone_001
+  m_Name: Upper Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -144,7 +144,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400018}
   m_Layer: 0
-  m_Name: Bone_003_L_003
+  m_Name: Left Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -219,7 +219,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400028}
   m_Layer: 0
-  m_Name: Bone_003_L_016
+  m_Name: Left Chest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -264,7 +264,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400034}
   m_Layer: 0
-  m_Name: Bone_003_R
+  m_Name: Right Shoulder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -279,7 +279,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400036}
   m_Layer: 0
-  m_Name: Bone_003_L
+  m_Name: Left Shoulder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -339,7 +339,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400044}
   m_Layer: 0
-  m_Name: Bone_003
+  m_Name: Upper Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -445,7 +445,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400058}
   m_Layer: 0
-  m_Name: Bone_002_L
+  m_Name: Left Leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -460,9 +460,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 400060}
   - 143: {fileID: 14300000}
-  - 114: {fileID: 11400000}
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400004}
+  - 95: {fileID: 9500000}
   m_Layer: 0
   m_Name: test_zombie_prefab
   m_TagString: Untagged
@@ -494,7 +494,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400064}
   m_Layer: 0
-  m_Name: Bone_003_L_001
+  m_Name: Left Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -509,7 +509,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400066}
   m_Layer: 0
-  m_Name: base
+  m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -554,7 +554,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400072}
   m_Layer: 0
-  m_Name: Bone_002_R
+  m_Name: Right Leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -584,7 +584,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400076}
   m_Layer: 0
-  m_Name: Bone_003_R_016
+  m_Name: Right Chest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -644,7 +644,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400084}
   m_Layer: 0
-  m_Name: Bone_004
+  m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -749,7 +749,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400098}
   m_Layer: 0
-  m_Name: Bone_003_R_001
+  m_Name: Right Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -764,7 +764,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400100}
   m_Layer: 0
-  m_Name: Bone_002
+  m_Name: Lower Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -809,7 +809,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400106}
   m_Layer: 0
-  m_Name: Bone_003_R_003
+  m_Name: Right Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -884,7 +884,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400116}
   m_Layer: 0
-  m_Name: Bone_003_L_017
+  m_Name: Left Lower Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -979,7 +979,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.8784765, y: -.24598068, z: -1.33207202}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1158,8 +1158,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100034}
-  m_LocalRotation: {x: .442503035, y: -.46222502, z: -.55229032, w: .534335554}
-  m_LocalPosition: {x: -.515143752, y: 3.88922885e-08, z: -2.79396772e-08}
+  m_LocalRotation: {x: .477849007, y: -.498747468, z: -.519545615, w: .502974868}
+  m_LocalPosition: {x: -.515210927, y: 1.32805212e-07, z: 3.34968513e-06}
   m_LocalScale: {x: 1.00000012, y: 1.00000012, z: 1.00000012}
   m_Children:
   - {fileID: 400098}
@@ -1353,8 +1353,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100064}
-  m_LocalRotation: {x: -.0208502095, y: -.0114585748, z: -.0366590321, w: .999044597}
-  m_LocalPosition: {x: -.572214007, y: 4.55765985e-08, z: -9.67411324e-08}
+  m_LocalRotation: {x: 0, y: -.675590217, z: 0, w: .737277389}
+  m_LocalPosition: {x: -.572212934, y: 8.36865092e-06, z: 5.16437358e-05}
   m_LocalScale: {x: .99999994, y: .999999762, z: .999999881}
   m_Children:
   - {fileID: 400116}
@@ -1576,8 +1576,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100098}
-  m_LocalRotation: {x: .0208502207, y: -.0114585776, z: .0366590284, w: .999044597}
-  m_LocalPosition: {x: -.572213948, y: 5.03787305e-08, z: 2.42551323e-07}
+  m_LocalRotation: {x: 0, y: -.678208768, z: 0, w: .734869301}
+  m_LocalPosition: {x: -.572211862, y: 7.1465679e-06, z: 8.0121019e-05}
   m_LocalScale: {x: .999999821, y: .999999762, z: .999999881}
   m_Children:
   - {fileID: 400000}
@@ -1740,21 +1740,21 @@ Transform:
   - {fileID: 400110}
   m_Father: {fileID: 400012}
   m_RootOrder: 0
---- !u!114 &11400000
-MonoBehaviour:
+--- !u!95 &9500000
+Animator:
+  serializedVersion: 3
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100060}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1673e4ed8cadf6a45aed8dcafddcbddd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 0
-  attackStyle: 1
-  deathSound: {fileID: 8300000, guid: 10af8b1b78a49a042a0f5a8b8534b798, type: 3}
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 51ed3465b239f5c4d95eb6539a911cae, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1768,14 +1768,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chaseDistance: 10
   patrol:
-    patrolRadius: 10
+    patrolRadius: 20
     patrolPoint: {fileID: 0}
   movement:
-    patrolSpeed: 3
-    chaseSpeed: 9
-    rotationSpeed: 10
-    gravity: 10
-  animator: {fileID: 0}
+    patrolSpeed: 2
+    chaseSpeed: 8
+    rotationSpeed: 20
+    gravity: 20
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1787,7 +1786,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1ed3d150760cbe49a942a3a911db6d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDistance: 1
+  enemy:
+    maxHealth: 200
+    attackDistance: 3
+    attackStyle: 1
+  sounds:
+    deathSound: {fileID: 8300000, guid: 10af8b1b78a49a042a0f5a8b8534b798, type: 3}
+    hurtShound: {fileID: 8300000, guid: 1d4840678e677424b8921716c72397ea, type: 3}
+    attackSound: {fileID: 8300000, guid: cc28efa0002525f4faca77c5dc4ccc9a, type: 3}
 --- !u!137 &13700000
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

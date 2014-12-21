@@ -18,14 +18,12 @@ public class PickUpItem : MonoBehaviour
     public Item item;
 
     private GameObject player;
-    private GameObject canvas;
     bool canPickUpItem = false;
     Inventory inventory;
-    // Use this for initialization
+
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-        canvas = GameObject.FindGameObjectWithTag("Canvas");
+        player = GameObject.FindGameObjectWithTag(TagManager.player);
         inventory = player.GetComponent<Inventory>();
     }
 
@@ -42,20 +40,15 @@ public class PickUpItem : MonoBehaviour
     void OnTriggerEnter(Collider collider)
     {
         Debug.Log(collider.name);
-        if (collider.name.Equals("Player"))
+        if (collider.tag.Equals(TagManager.player))
         {
             canPickUpItem = true;
-            //Vector3 target = player.transform.position - transform.position;
-            //canvas.transform.rotation = LookAtTarget(target);
         }
     }
     void OnTriggerExit(Collider collider)
     {
-        Debug.Log("Leaving" + collider.name);
-        if (collider.name.Equals("Player"))
-        {
+        if (collider.tag.Equals(TagManager.player))
             canPickUpItem = true;
-        }
     }
     private Quaternion LookAtTarget(Vector3 target)
     {

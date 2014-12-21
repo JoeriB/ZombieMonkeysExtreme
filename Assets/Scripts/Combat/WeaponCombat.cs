@@ -52,8 +52,8 @@ public class WeaponCombat : MonoBehaviour
 
     public void Initiate()
     {
-        weaponText = GameObject.FindGameObjectWithTag("WeaponText").GetComponent<Text>();
-        weaponImage = GameObject.FindGameObjectWithTag("WeaponImage").GetComponent<Image>();
+        weaponText = GameObject.FindGameObjectWithTag(TagManager.weaponText).GetComponent<Text>();
+        weaponImage = GameObject.FindGameObjectWithTag(TagManager.weaponImage).GetComponent<Image>();
 
         weapon.currentTotalBullets = weapon.maxBullets - weapon.maxBulletsPerMag;
         weapon.currentBulletsInMag = weapon.maxBulletsPerMag;
@@ -63,7 +63,7 @@ public class WeaponCombat : MonoBehaviour
 
         if (weapon.weaponType != WeaponType.KNIFE)
         {
-            GameObject particles = GameObject.FindGameObjectWithTag("GunParticle");
+            GameObject particles = GameObject.FindGameObjectWithTag(TagManager.gunParticle);
             shootParticle = particles.GetComponent<ParticleSystem>();
             aimLine = particles.GetComponent<LineRenderer>();
         }
@@ -194,6 +194,7 @@ public class WeaponCombat : MonoBehaviour
         }
         yield return new WaitForSeconds(weapon.timeBetweenBullets);
     }
+
     public void DrawWeapon()
     {
         PlayAnimation(GetWeaponDrawTrigger());

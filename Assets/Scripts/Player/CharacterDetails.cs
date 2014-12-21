@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
-
+/**
+ * @Author: Joeri Boons
+ * @ZombieMonkeysExtreme Character Details: This contains detailled information about every character in our game.
+ */
 public class CharacterDetails : MonoBehaviour
 {
 

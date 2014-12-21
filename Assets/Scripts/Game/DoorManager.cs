@@ -20,7 +20,6 @@ public class DoorManager : MonoBehaviour
     bool canOpen = false;
     bool doorOpen = false;
 
-    // Update is called once per frame
     void Update()
     {
         if (canOpen && Input.GetKeyDown("e"))
@@ -41,17 +40,13 @@ public class DoorManager : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
-        if (collider.name.Equals("Player"))
-        {
+        if (collider.name.Equals(TagManager.player))
             canOpen = true;
-        }
     }
     void OnTriggerExit(Collider collider)
     {
-        if (collider.name.Equals("Player"))
-        {
+        if (collider.name.Equals(TagManager.player))
             canOpen = false;
-        }
     }
 
     public bool isDoorOpen()

@@ -24,11 +24,11 @@ public class EnemyCombat : MonoBehaviour
 
     private int currentHealth;
     private GameObject player;
-    // Use this for initialization
+
     void Start()
     {
         currentHealth = enemy.maxHealth;
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag(TagManager.player);
     }
 
     public void HandleCombat()

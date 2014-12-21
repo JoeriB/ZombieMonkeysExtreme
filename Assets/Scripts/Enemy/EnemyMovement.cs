@@ -27,36 +27,36 @@ public class EnemyMovement : MonoBehaviour
 
     public Patrol patrol;
     public Movement movement;
-    public Animator animator;
 
     private CharacterController controller;
     private GameObject player;
     private Vector3 randomPatrolPoint;
     private EnemyCombat combat;
+    private Animator animator;
 
     void Start()
     {
         //Character Controller
         controller = GetComponent<CharacterController>();
         //Our Player
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag(TagManager.player);
         //Our Enemy Combat script
         combat = GetComponent<EnemyCombat>();
         //Random Patrol point to start with
         randomPatrolPoint = patrol.patrolPoint.position + UnityEngine.Random.insideUnitSphere * patrol.patrolRadius;
         //TODO: Animations: RUN ANIM/CHASE ANIMS/ATTACK ANIMS/MAKE SURE THEY CAN ATTACK BACK
+        animator = GetComponent<Animator>();
         //TODO: Add clock to the game... 
         //TODO: Complete Cleanup + scripts nakijken/commentaar/end screen
-        //TODO: Have fun! VRIJDAG vragen of dit model goed genoeg is
     }
     void Update()
     {
         float distance = Vector3.Distance(player.transform.position, transform.position);
-        if (distance <= chaseDistance)
+        if (distance <= chaseDistance && distance > combat.enemy.attackDistance)
             chasePlayer();
         if (distance <= combat.enemy.attackDistance)
             combat.HandleCombat();
-        else
+        if (distance > chaseDistance)
             patrolArea();
     }
 
@@ -72,6 +72,7 @@ public class EnemyMovement : MonoBehaviour
         movDir.y -= movement.gravity;
         //Move our enemy
         controller.Move(movDir);
+        PlayAnimation(Animator.StringToHash("Chase"));
     }
 
     private void patrolArea()
@@ -93,7 +94,10 @@ public class EnemyMovement : MonoBehaviour
         }
         //Move enemy
         else
+        {
             controller.Move(moveDirection * Time.deltaTime);
+            PlayAnimation(Animator.StringToHash("Walk"));
+        }
     }
 
     /**
@@ -105,5 +109,11 @@ public class EnemyMovement : MonoBehaviour
         newRotation.x = 0;
         newRotation.z = 0;
         return Quaternion.Slerp(transform.rotation, newRotation, movement.rotationSpeed * Time.deltaTime);
+    }
+
+    private void PlayAnimation(int animationHash)
+    {
+        if (!animator.GetCurrentAnimatorStateInfo(0).nameHash.Equals(animationHash))
+            animator.SetTrigger(animationHash);
     }
 }

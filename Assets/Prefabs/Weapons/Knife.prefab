@@ -2647,8 +2647,8 @@ MonoBehaviour:
     maxBulletsPerMag: 0
     currentBulletsInMag: 0
     currentTotalBullets: 0
-    shootRange: 25
-    timeBetweenBullets: .25
+    shootRange: 3
+    timeBetweenBullets: 1
     timeBetweenReload: 0
     timeBeforeMagBackIn: 0
     timeBeforeSpecialSound: 0

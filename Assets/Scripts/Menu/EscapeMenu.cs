@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 /**
  * @Author: Joeri Boons
@@ -7,13 +8,20 @@ using System.Collections;
  */
 public class EscapeMenu : MonoBehaviour
 {
-
+    public GameObject[] uiMonkeys;
     private bool pause = false;
-    public GameObject pauseMenu;
-    public GameObject playerHUD;
-    public GameObject player;
 
-    // Update is called once per frame
+    private GameObject escapeMenu;
+    private GameObject player;
+    private GameObject playerHUD;
+
+    public void Instantiate()
+    {
+        player = GameObject.FindGameObjectWithTag(TagManager.player);
+        escapeMenu = GameObject.FindGameObjectWithTag(TagManager.escapeMenu);
+        playerHUD = GameObject.FindGameObjectWithTag(TagManager.playerHUD);
+    }
+
     void Update()
     {
         if (Input.GetKeyUp(KeyCode.Escape))
@@ -41,7 +49,7 @@ public class EscapeMenu : MonoBehaviour
 
         //Set time to 0 + Activate menu and Deactive Player HUD etc..
         Time.timeScale = (pause) ? 0.0f : 1.0f;
-        pauseMenu.SetActive(pause);
+        escapeMenu.SetActive(pause);
         playerHUD.SetActive(!pause);
         Screen.lockCursor = !pause;
 
@@ -49,5 +57,13 @@ public class EscapeMenu : MonoBehaviour
         player.GetComponent<FPSMouseMovement>().enabled = !pause;
         Camera.main.GetComponent<AudioListener>().enabled = !pause;
         player.GetComponentInChildren<WeaponCombat>().enabled = !pause;
+
+        //Monkey UI
+        foreach (GameObject monkey in uiMonkeys)
+        {
+            monkey.SetActive(pause);
+        }
+        //Transparency of our game in pause/normal mode 
+        GameObject.FindGameObjectWithTag(TagManager.uiPanel).GetComponent<Image>().color = new Color(0, 0, 0, (pause) ? 255 : 0);
     }
 }

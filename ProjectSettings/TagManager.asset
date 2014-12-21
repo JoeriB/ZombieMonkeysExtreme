@@ -23,6 +23,10 @@ TagManager:
   - Canvas
   - GameTimeText
   - Wall
+  - PlayerHealthText
+  - PlayerKillsText
+  - UIMonkey
+  - UIPanel
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

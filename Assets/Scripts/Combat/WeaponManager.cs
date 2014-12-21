@@ -15,7 +15,6 @@ public class WeaponManager : MonoBehaviour
         public float timeBetweenSwitch = 2f;
         public float switchTimer = 0f;
     }
-    //public Animator animator;
     public Switch switchConfig;
     public GameObject[] weaponList;
     public int currentWeaponIndex = 0;
@@ -26,7 +25,6 @@ public class WeaponManager : MonoBehaviour
         SelectWeapon();
     }
 
-    // Update is called once per frame
     void Update()
     {
         switchConfig.switchTimer += Time.deltaTime;

@@ -12,18 +12,21 @@ public class PlayerStats : MonoBehaviour
     public int currentKills = 0;
     public int playerHealth = 100;
     public int currentHealth = 0;
-    public Text playerHealthText;
-    public Text playerKillsText;
 
+    private Text playerKillsText;
+    private Text playerHealthText;
     private float timeLeft;
     private Text gameTimeText;
-    // Use this for initialization
+
     void Start()
     {
+        playerHealthText = GameObject.FindGameObjectWithTag(TagManager.playerHealthText).GetComponent<Text>();
+        gameTimeText = GameObject.FindGameObjectWithTag(TagManager.gameTimeText).GetComponent<Text>();
+        playerKillsText = GameObject.FindGameObjectWithTag(TagManager.playerKillsText).GetComponent<Text>();
+
         currentHealth = playerHealth;
         playerHealthText.text = currentHealth + "/" + playerHealth;
         playerKillsText.text = "Kill Score: " + currentKills;
-        gameTimeText = GameObject.FindGameObjectWithTag("GameTimeText").GetComponent<Text>();
     }
 
     void Update()
@@ -34,7 +37,6 @@ public class PlayerStats : MonoBehaviour
         gameTimeText.text = string.Format("Game Time: {0:D2}:{1:D2}", ts.Minutes, ts.Seconds);
     }
 
-    //Script oproepen in npc combat.
     public void IncrementKills()
     {
         currentKills++;

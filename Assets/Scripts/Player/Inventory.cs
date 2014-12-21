@@ -16,8 +16,7 @@ public class Inventory : MonoBehaviour
 
     public void Initiate()
     {
-        slots = GameObject.FindGameObjectsWithTag("Slot");
-        Debug.Log(slots.Length);
+        slots = GameObject.FindGameObjectsWithTag(TagManager.slot);
         UpdateGameText();
     }
 
