@@ -20,14 +20,12 @@ public class PlayerStats : MonoBehaviour
 
     private Slider playerHealthBarSlider;
 
-    private GameObject uiPanel;
     private GameObject deathScreen;
 
     private float timeLeft;
     private bool isDead = false;
 
     private Animator animator;
-    private EndGame endGame;
 
     void Start()
     {
@@ -35,7 +33,6 @@ public class PlayerStats : MonoBehaviour
         gameTimeText = GameObject.FindGameObjectWithTag(TagManager.gameTimeText).GetComponent<Text>();
         playerKillsText = GameObject.FindGameObjectWithTag(TagManager.playerKillsText).GetComponent<Text>();
         playerHealthBarSlider = GameObject.FindGameObjectWithTag(TagManager.playerHealthBar).GetComponent<Slider>();
-        uiPanel = GameObject.FindGameObjectWithTag(TagManager.uiPanel);
         animator = GetComponent<Animator>();
 
         currentHealth = maxHealth;
@@ -69,7 +66,6 @@ public class PlayerStats : MonoBehaviour
         if (currentHealth <= 0)
         {
             isDead = true;
-            endGame.EndGame();
         }
     }
 

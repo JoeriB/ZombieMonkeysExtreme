@@ -24,7 +24,7 @@ public class EndGame : MonoBehaviour
         if (canEndGame && !endGameDoor.isDoorOpen())
         {
             if (inventory.hasAllItems())
-                EndGame();
+                EndTheGame();
             else
                 Debug.Log("You need more items...");
         }
@@ -41,7 +41,7 @@ public class EndGame : MonoBehaviour
             canEndGame = true;
     }
 
-    public void EndGame()
+    public void EndTheGame()
     {
         if (player != null)
         {
