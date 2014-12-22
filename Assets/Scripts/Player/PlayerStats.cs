@@ -12,15 +12,12 @@ public class PlayerStats : MonoBehaviour
     public int currentKills = 0;
     public int maxHealth = 100;
     public int currentHealth = 0;
-    public float deathDelay;
 
     private Text playerKillsText;
     private Text playerHealthText;
     private Text gameTimeText;
 
     private Slider playerHealthBarSlider;
-
-    private GameObject deathScreen;
 
     private float timeLeft;
     private bool isDead = false;
@@ -66,6 +63,7 @@ public class PlayerStats : MonoBehaviour
         if (currentHealth <= 0)
         {
             isDead = true;
+            StartCoroutine(GetComponent<EndGame>().EndTheGame());
         }
     }
 

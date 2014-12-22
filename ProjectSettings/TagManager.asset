@@ -29,6 +29,7 @@ TagManager:
   - UIPanel
   - PlayerHealthBar
   - DeathScreen
+  - UI
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

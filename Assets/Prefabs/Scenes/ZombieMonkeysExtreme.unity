@@ -7220,7 +7220,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 164104094}
   - 65: {fileID: 164104096}
-  - 114: {fileID: 164104095}
   m_Layer: 0
   m_Name: Safe House
   m_TagString: Untagged
@@ -7253,19 +7252,6 @@ Transform:
   - {fileID: 1945794420}
   m_Father: {fileID: 445130830}
   m_RootOrder: 1
---- !u!114 &164104095
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 164104093}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01622fe2b74155247a6746b75683a268, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  endGameDoor: {fileID: 1790568552}
-  player: {fileID: 358817734}
 --- !u!65 &164104096
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16085,8 +16071,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01622fe2b74155247a6746b75683a268, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  endGameDoor: {fileID: 0}
-  player: {fileID: 0}
+  endGameDoor: {fileID: 1790568552}
+  deathScreen: {fileID: 1828582542}
+  uiMonkeys:
+  - {fileID: 910312920}
+  - {fileID: 1184441033}
+  endGameDelay: 10
 --- !u!143 &358817739
 CharacterController:
   m_ObjectHideFlags: 0
@@ -16115,7 +16105,6 @@ MonoBehaviour:
   currentKills: 0
   maxHealth: 100
   currentHealth: 0
-  deathDelay: 10
 --- !u!114 &358817741
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75561,7 +75550,7 @@ GameObject:
   - 114: {fileID: 1609826062}
   m_Layer: 5
   m_Name: UI
-  m_TagString: Untagged
+  m_TagString: UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
