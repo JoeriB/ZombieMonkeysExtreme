@@ -46,7 +46,6 @@ public class EnemyMovement : MonoBehaviour
         randomPatrolPoint = patrol.patrolPoint.position + UnityEngine.Random.insideUnitSphere * patrol.patrolRadius;
         //TODO: Animations: RUN ANIM/CHASE ANIMS/ATTACK ANIMS/MAKE SURE THEY CAN ATTACK BACK
         animator = GetComponent<Animator>();
-        //TODO: Add clock to the game... 
         //TODO: Complete Cleanup + scripts nakijken/commentaar/end screen
     }
     void Update()

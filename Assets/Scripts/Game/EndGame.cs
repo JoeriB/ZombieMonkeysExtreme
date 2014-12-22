@@ -33,6 +33,7 @@ public class EndGame : MonoBehaviour
 
     public IEnumerator EndTheGame()
     {
+        Debug.Log("Ending game");
         Screen.lockCursor = false;
         deathScreen.SetActive(true);
         string deathText = "Game Over";
@@ -42,25 +43,24 @@ public class EndGame : MonoBehaviour
             monkey.SetActive(monkey);
         }
         GetComponent<FPSMouseMovement>().enabled = false;
+        GameObject.FindGameObjectWithTag(TagManager.weaponManager).SetActive(false);
         GameObject.FindGameObjectWithTag(TagManager.playerHUD).SetActive(false);
-        GameObject.FindGameObjectWithTag(TagManager.player).SetActive(false);
         GameObject.FindGameObjectWithTag(TagManager.ui).GetComponent<EscapeMenu>().enabled = false;
         GameObject.FindGameObjectWithTag(TagManager.uiPanel).GetComponent<Image>().color = new Color(0, 0, 0, 146);
         yield return new WaitForSeconds(endGameDelay);
-        Debug.Log("Reloading scene");
-        deathScreen.SetActive(false);
+        GameObject.FindGameObjectWithTag(TagManager.player).SetActive(false);
+
         Application.LoadLevel(Application.loadedLevel);
     }
 
-
     void OnTriggerEnter(Collider collider)
     {
-        if (collider.tag.Equals(TagManager.player))
+        if (collider.tag.Equals(TagManager.safeHouse))
             canEndGame = true;
     }
     void OnTriggerExit(Collider collider)
     {
-        if (collider.tag.Equals(TagManager.player))
-            canEndGame = true;
+        if (collider.tag.Equals(TagManager.safeHouse))
+            canEndGame = false;
     }
 }

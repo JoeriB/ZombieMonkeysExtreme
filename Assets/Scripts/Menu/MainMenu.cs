@@ -10,6 +10,12 @@ public class MainMenu : MonoBehaviour
     public GameObject mainMenu;
     public GameObject characterSelect;
 
+    private AudioSource audio;
+
+    void Start()
+    {
+        audio.GetComponent<AudioSource>();
+    }
     public void StartGame()
     {
         characterSelect.SetActive(true);
@@ -19,7 +25,8 @@ public class MainMenu : MonoBehaviour
 
     public void ShowOptions()
     {
-        //TODO: Options
+        GetComponent<OptionsMenu>().optionsMenu.SetActive(true);
+        mainMenu.SetActive(false);
     }
 
     public void QuitGame()

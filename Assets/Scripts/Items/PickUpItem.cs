@@ -30,7 +30,7 @@ public class PickUpItem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (canPickUpItem && Input.GetKeyDown("e"))
+        if (canPickUpItem && Input.GetKeyDown("e") && !inventory.hasAllItems())
         {
             inventory.addItem(item);
             Destroy(gameObject);
@@ -39,7 +39,6 @@ public class PickUpItem : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
-        Debug.Log(collider.name);
         if (collider.tag.Equals(TagManager.player))
         {
             canPickUpItem = true;

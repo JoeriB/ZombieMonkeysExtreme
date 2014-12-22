@@ -15,7 +15,7 @@ public class TagManager : MonoBehaviour
     public const string weaponText = "WeaponText";
     public const string weaponImage = "WeaponImage";
     public const string mainMenu = "MainMenu";
-    public const string house = "House";
+    public const string safeHouse = "SafeHouse";
     public const string inventory = "Inventory";
     public const string slot = "Slot";
     public const string minimap = "Minimap";

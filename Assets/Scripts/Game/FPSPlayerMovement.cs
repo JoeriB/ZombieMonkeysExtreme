@@ -18,6 +18,8 @@ public class FPSPlayerMovement : MonoBehaviour
     public float runSpeed = 10f;
     //How high we can jump
     public float jumpHeight = 2f;
+    //Limit Diagonal Speed
+    public bool limitDiagonalSpeed;
     //Gravity
     public float gravity = 20f;
     //Crouch Radius for height adjustment
@@ -43,29 +45,24 @@ public class FPSPlayerMovement : MonoBehaviour
     {
         float inputX = Input.GetAxis("Horizontal");
         float inputY = Input.GetAxis("Vertical");
-
+        float inputModifyFactor = (inputX != 0.0f && inputY != 0.0f && limitDiagonalSpeed) ? .70f : 1.0f;
 
         if (controller.isGrounded)
         {
-            if (Input.GetButton("Crouch"))
-            {
-            }
             speed = (Input.GetButton("Walk")) ? walkSpeed : runSpeed;
 
-            moveDirection = new Vector3(inputX, 0, inputY);
+            moveDirection = new Vector3(inputX * inputModifyFactor, 0, inputY * inputModifyFactor);
             moveDirection = transform.TransformDirection(moveDirection);
             moveDirection *= speed;
 
             if (Input.GetButton("Jump"))
-            {
-                Debug.Log("Jumping");
                 moveDirection.y = jumpHeight;
-            }
+            //Fixed random hopping when looking up...!
+            else
+                moveDirection.y = Terrain.activeTerrain.transform.position.y;
         }
         moveDirection.y -= gravity * Time.deltaTime;
         controller.Move(moveDirection * Time.deltaTime);
-
-
     }
 
     public void ApplyCharacterDetails(CharacterDetails details)
