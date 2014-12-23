@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 /**
  * @Author: Joeri Boons
@@ -10,12 +9,6 @@ public class MainMenu : MonoBehaviour
     public GameObject mainMenu;
     public GameObject characterSelect;
 
-    private AudioSource audio;
-
-    void Start()
-    {
-        audio.GetComponent<AudioSource>();
-    }
     public void StartGame()
     {
         characterSelect.SetActive(true);

@@ -54,23 +54,24 @@ public class EnemyCombat : MonoBehaviour
 
     public void HandleIncomingDamage(int damage)
     {
-        //Play our hurt sound + animation
-        AudioSource.PlayClipAtPoint(sounds.hurtShound, transform.position);
-        //TODO: Hurt Animation
-        //Apply damage
-        currentHealth -= damage;
-        //Check if the enemy is dead
-        if (currentHealth <= 0)
+        if (sounds.hurtShound != null)
         {
-            HandleDeath();
+            //TODO: Hurt/Death Animation
+            //Apply damage
+            currentHealth -= damage;
+            AudioSource.PlayClipAtPoint(sounds.hurtShound, transform.position);
+            //Check if the enemy is dead
+            if (currentHealth <= 0)
+            {
+                HandleDeath();
+            }
         }
     }
 
     private void HandleDeath()
     {
         player.GetComponent<PlayerStats>().IncrementKills();
-        //TODO: Death animation
-        AudioSource.PlayClipAtPoint(sounds.attackSound, transform.position);
+        AudioSource.PlayClipAtPoint(sounds.deathSound, transform.position);
         Destroy(this.gameObject);
     }
 }

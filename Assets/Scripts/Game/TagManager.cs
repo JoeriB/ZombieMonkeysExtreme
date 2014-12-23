@@ -6,6 +6,7 @@ using System.Collections;
  */
 public class TagManager : MonoBehaviour
 {
+    public const string gameName = "ZombieMonkeysExtreme";
     public const string player = "Player";
     public const string escapeMenu = "EscapeMenu";
     public const string playerHUD = "PlayerHUD";

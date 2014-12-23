@@ -22,7 +22,12 @@ public class WeaponManager : MonoBehaviour
 
     public void Initiate()
     {
-        SelectWeapon();
+        ActivateNextWeapon();
+
+        WeaponCombat weaponCombat = currentWeapon.GetComponent<WeaponCombat>();
+        weaponCombat.Initiate();
+        weaponCombat.DrawWeapon();
+        weaponCombat.UpdateWeaponText();
     }
 
     void Update()
@@ -61,7 +66,7 @@ public class WeaponManager : MonoBehaviour
         ActivateNextWeapon();
 
         WeaponCombat weaponCombat = currentWeapon.GetComponent<WeaponCombat>();
-        weaponCombat.Initiate();
+        //weaponCombat.Initiate();
         weaponCombat.DrawWeapon();
         weaponCombat.UpdateWeaponText();
 

@@ -43,4 +43,9 @@ public class Inventory : MonoBehaviour
     {
         return counter >= slots.Length;
     }
+
+    public int getItemCount()
+    {
+        return counter;
+    }
 }

@@ -33,23 +33,24 @@ public class EndGame : MonoBehaviour
 
     public IEnumerator EndTheGame()
     {
-        Debug.Log("Ending game");
+        GameObject player = GameObject.FindGameObjectWithTag(TagManager.player);
         Screen.lockCursor = false;
+
         deathScreen.SetActive(true);
-        string deathText = "Game Over";
-        deathScreen.GetComponentInChildren<Text>().text = deathText;
+        deathScreen.GetComponentInChildren<Text>().text = player.GetComponent<PlayerStats>().GetEndGameText();
+
         foreach (GameObject monkey in uiMonkeys)
         {
             monkey.SetActive(monkey);
         }
+
         GetComponent<FPSMouseMovement>().enabled = false;
         GameObject.FindGameObjectWithTag(TagManager.weaponManager).SetActive(false);
         GameObject.FindGameObjectWithTag(TagManager.playerHUD).SetActive(false);
         GameObject.FindGameObjectWithTag(TagManager.ui).GetComponent<EscapeMenu>().enabled = false;
         GameObject.FindGameObjectWithTag(TagManager.uiPanel).GetComponent<Image>().color = new Color(0, 0, 0, 146);
         yield return new WaitForSeconds(endGameDelay);
-        GameObject.FindGameObjectWithTag(TagManager.player).SetActive(false);
-
+        player.SetActive(false);
         Application.LoadLevel(Application.loadedLevel);
     }
 

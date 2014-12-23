@@ -36,6 +36,7 @@ public class CharacterMenu : MonoBehaviour
                 if (activationObject.tag.Equals(TagManager.player))
                 {
                     activationObject.GetComponent<FPSPlayerMovement>().ApplyCharacterDetails(selectedCharacter.GetComponent<CharacterDetails>());
+                    activationObject.GetComponent<PlayerStats>().SetCharacterName(selectedCharacter.name);
                     activationObject.GetComponentInChildren<WeaponManager>().Initiate();
                     activationObject.GetComponent<Inventory>().Initiate();
                 }

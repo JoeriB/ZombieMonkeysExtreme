@@ -50,7 +50,16 @@ public class WeaponCombat : MonoBehaviour
     float timer;
     float reloadTimer;
 
+    void Start()
+    {
+        StartUpWeapon();
+    }
     public void Initiate()
+    {
+        StartUpWeapon();
+    }
+
+    private void StartUpWeapon()
     {
         weaponText = GameObject.FindGameObjectWithTag(TagManager.weaponText).GetComponent<Text>();
         weaponImage = GameObject.FindGameObjectWithTag(TagManager.weaponImage).GetComponent<Image>();
@@ -202,11 +211,14 @@ public class WeaponCombat : MonoBehaviour
     }
     public void UpdateWeaponText()
     {
-        weaponText.text = name + Environment.NewLine;
-        if (weapon.weaponType != WeaponType.KNIFE)
-            weaponText.text += "Ammo: " + weapon.currentBulletsInMag + "/" + weapon.currentTotalBullets;
+        if (weaponText != null)
+        {
+            weaponText.text = name + Environment.NewLine;
+            if (weapon.weaponType != WeaponType.KNIFE)
+                weaponText.text += "Ammo: " + weapon.currentBulletsInMag + "/" + weapon.currentTotalBullets;
 
-        weaponImage.sprite = weaponConfig.weaponSprite;
+            weaponImage.sprite = weaponConfig.weaponSprite;
+        }
     }
     public void PlayAnimation(int animationHash)
     {
