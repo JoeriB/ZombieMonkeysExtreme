@@ -10,9 +10,14 @@ using System.Text;
  */
 public class PlayerStats : MonoBehaviour
 {
-    public int currentKills = 0;
-    public int maxHealth = 100;
-    public int currentHealth = 0;
+    [SerializeField]
+    private int currentKills = 0;
+    [SerializeField]
+    private int maxHealth = 100;
+    [SerializeField]
+    private int currentHealth = 0;
+    [SerializeField]
+    private float audioDelay;
 
     [Serializable]
     public class HUD
@@ -68,23 +73,27 @@ public class PlayerStats : MonoBehaviour
         hud.playerKillsText.text = "Kill Score: " + currentKills;
     }
 
-    public void HandleIncomingDamage(int damage)
+    public IEnumerator HandleIncomingDamage(int damage)
     {
+        yield return new WaitForSeconds(audioDelay);
+        AudioClip audioClip = null;
+        int animationTrigger = 0;
         if (!isPlayerDead())
         {
             currentHealth -= damage;
             hud.playerHealthText.text = currentHealth + "/" + maxHealth;
             hud.playerHealthBarSlider.value = currentHealth;
-            animator.SetTrigger(Animator.StringToHash("Hurt"));
-            AudioSource.PlayClipAtPoint(sound.hurtSound, transform.position);
-
+            audioClip = sound.hurtSound;
+            animationTrigger = Animator.StringToHash("Hurt");
         }
         if (currentHealth <= 0)
         {
             isDead = true;
-            AudioSource.PlayClipAtPoint(sound.deathSound, transform.position);
+            audioClip = sound.deathSound;
             StartCoroutine(GetComponent<EndGame>().EndTheGame());
         }
+        AudioSource.PlayClipAtPoint(audioClip, transform.position);
+        animator.SetTrigger(animationTrigger);
     }
 
     public bool isPlayerDead()
@@ -94,9 +103,14 @@ public class PlayerStats : MonoBehaviour
 
     public string GetEndGameText()
     {
-        TimeSpan ts = TimeSpan.FromSeconds(timeInGame);
+        var endTime = timeInGame;
+        TimeSpan ts = TimeSpan.FromSeconds(endTime);
         StringBuilder sb = new StringBuilder();
         sb.Append("Game Over! Thank you for playing ").Append(TagManager.gameName).Append("!").Append(Environment.NewLine);
+        if (currentHealth > 0)
+            sb.Append("You Survived! Congratulations! Have a cookie!").Append(Environment.NewLine);
+        else
+            sb.Append("You died trying to complete this simple mission. Better luck next time...").Append(Environment.NewLine);
         sb.Append(Environment.NewLine);
         sb.Append("Played as ").Append(characterName).Append(Environment.NewLine);
         string time = string.Format("{0:D2}:{1:D2}", ts.Minutes, ts.Seconds);

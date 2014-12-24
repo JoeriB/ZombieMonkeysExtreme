@@ -1004,7 +1004,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100010}
-  m_LocalRotation: {x: -2.86682713e-08, y: -.0600941181, z: -1.45277479e-09, w: .998192728}
+  m_LocalRotation: {x: 0, y: .0600942783, z: 0, w: -.998192728}
   m_LocalPosition: {x: -2.30915546, y: 1.74336378e-07, z: .0626744032}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1158,7 +1158,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100034}
-  m_LocalRotation: {x: .477849007, y: -.498747468, z: -.519545615, w: .502974868}
+  m_LocalRotation: {x: -.477848947, y: .498747677, z: .519545615, w: -.502974749}
   m_LocalPosition: {x: -.515210927, y: 1.32805212e-07, z: 3.34968513e-06}
   m_LocalScale: {x: 1.00000012, y: 1.00000012, z: 1.00000012}
   m_Children:
@@ -1327,7 +1327,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100060}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 230.069824, y: 1.47161865, z: 300.980072}
+  m_LocalPosition: {x: 234.350006, y: 2.1099999, z: 306.170013}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400026}
@@ -1791,10 +1791,10 @@ MonoBehaviour:
     attackDamage: 20
     attackDistance: 4
     attackCooldown: 2
-    attackStyle: 1
+    attackStyle: 0
   sounds:
-    deathSound: {fileID: 8300000, guid: 10af8b1b78a49a042a0f5a8b8534b798, type: 3}
-    hurtShound: {fileID: 8300000, guid: 1d4840678e677424b8921716c72397ea, type: 3}
+    deathSound: {fileID: 8300000, guid: c2031325eee045f4695d22a9db36f6a9, type: 3}
+    hurtShound: {fileID: 8300000, guid: 10af8b1b78a49a042a0f5a8b8534b798, type: 3}
     attackSound: {fileID: 8300000, guid: cc28efa0002525f4faca77c5dc4ccc9a, type: 3}
 --- !u!137 &13700000
 SkinnedMeshRenderer:

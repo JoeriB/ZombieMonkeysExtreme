@@ -19,7 +19,6 @@ public class MainMenu : MonoBehaviour
     public void ShowOptions()
     {
         GetComponent<OptionsMenu>().optionsMenu.SetActive(true);
-        mainMenu.SetActive(false);
     }
 
     public void QuitGame()

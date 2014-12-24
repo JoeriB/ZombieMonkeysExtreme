@@ -14,6 +14,8 @@ public class EscapeMenu : MonoBehaviour
     private GameObject escapeMenu;
     private GameObject player;
     private GameObject playerHUD;
+    [SerializeField]
+    private GameObject optionsMenu;
 
     public void Instantiate()
     {
@@ -30,20 +32,7 @@ public class EscapeMenu : MonoBehaviour
         }
     }
 
-    public void ClickButton(string message)
-    {
-
-        if (message.Equals("resume"))
-        {
-            PauseGame();
-        }
-        if (message.Equals("quit"))
-        {
-            Application.Quit();
-        }
-    }
-
-    void PauseGame()
+    public void PauseGame()
     {
         pause = !pause;
 
@@ -56,7 +45,9 @@ public class EscapeMenu : MonoBehaviour
         //Scripts/AudioListener in/uitschakelen
         player.GetComponent<FPSMouseMovement>().enabled = !pause;
         Camera.main.GetComponent<AudioListener>().enabled = !pause;
+        player.GetComponentInChildren<WeaponManager>().enabled = !pause;
         player.GetComponentInChildren<WeaponCombat>().enabled = !pause;
+        player.GetComponentInChildren<Crosshair>().enabled = !pause;
 
         //Monkey UI
         foreach (GameObject monkey in uiMonkeys)
@@ -65,5 +56,15 @@ public class EscapeMenu : MonoBehaviour
         }
         //Transparency of our game in pause/normal mode 
         GameObject.FindGameObjectWithTag(TagManager.uiPanel).GetComponent<Image>().color = new Color(0, 0, 0, (pause) ? 255 : 0);
+    }
+
+    public void ShowOptions()
+    {
+        optionsMenu.SetActive(true);
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
     }
 }
