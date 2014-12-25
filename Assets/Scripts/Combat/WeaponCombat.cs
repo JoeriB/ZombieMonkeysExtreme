@@ -34,7 +34,7 @@ public class WeaponCombat : MonoBehaviour
         public AudioClip reloadThirdSound;
         public AudioClip fireSound;
         public AudioClip drawSound;
-
+        public AudioClip zoomSound;
         public ParticleSystem fireParticle;
         public Sprite weaponSprite;
     }
@@ -43,17 +43,18 @@ public class WeaponCombat : MonoBehaviour
     public WeaponConfig weaponConfig;
     public Animator animator;
 
-    Text weaponText;
-    Image weaponImage;
-    ParticleSystem shootParticle;
-    LineRenderer aimLine;
-    float timer;
-    float reloadTimer;
+    private Text weaponText;
+    private Image weaponImage;
+    private ParticleSystem shootParticle;
+    private LineRenderer aimLine;
+    private float timer;
+    private float reloadTimer;
 
     void Start()
     {
         StartUpWeapon();
     }
+
     public void Initiate()
     {
         StartUpWeapon();
@@ -91,59 +92,25 @@ public class WeaponCombat : MonoBehaviour
         if (Input.GetButton("Fire1"))
         {
             if (weapon.weaponType != WeaponType.KNIFE)
-            {
                 StartCoroutine(Shoot());
-            }
             else
-            {
                 StartCoroutine(Knife());
-            }
         }
+        if (Input.GetButton("Zoom"))
+            Zoom();
+        else
+            Camera.main.fieldOfView = 60f;
         if (aimLine != null && timer >= weapon.timeBetweenBullets * weapon.aimLineDisplayTime && weapon.weaponType != WeaponType.KNIFE)
         {
             aimLine.enabled = false;
         }
     }
+    #region shooting/knifing/zooming
 
-    IEnumerator ReloadSpecialSound()
+    public void Zoom()
     {
-        yield return new WaitForSeconds(weapon.timeBeforeSpecialSound);
-        AudioSource.PlayClipAtPoint(weaponConfig.reloadThirdSound, transform.position);
+        Camera.main.fieldOfView = 15f;
     }
-
-    IEnumerator ReloadMagBackInSound()
-    {
-        yield return new WaitForSeconds(weapon.timeBeforeMagBackIn);
-        AudioSource.PlayClipAtPoint(weaponConfig.reloadMagInSound, transform.position);
-    }
-    IEnumerator Reload()
-    {
-        if (weapon.currentTotalBullets > 0 && weapon.currentBulletsInMag < weapon.maxBulletsPerMag)
-        {
-            StartCoroutine(ReloadMagBackInSound());
-            if (weaponConfig.reloadThirdSound != null)
-            {
-                StartCoroutine(ReloadSpecialSound());
-            }
-
-            reloadTimer = 0f;
-            AudioSource.PlayClipAtPoint(weaponConfig.reloadMagOutSound, transform.position);
-
-            int bulletsLeftInMag = weapon.maxBulletsPerMag - weapon.currentBulletsInMag;
-            if (bulletsLeftInMag > weapon.currentTotalBullets)
-            {
-                bulletsLeftInMag = weapon.currentTotalBullets;
-            }
-            weapon.currentBulletsInMag += bulletsLeftInMag;
-            weapon.currentTotalBullets -= bulletsLeftInMag;
-
-            PlayAnimation(GetWeaponReloadTrigger());
-
-            yield return new WaitForSeconds(weapon.timeBetweenReload);
-            UpdateWeaponText();
-        }
-    }
-
     IEnumerator Shoot()
     {
         if (timer >= weapon.timeBetweenBullets && reloadTimer >= weapon.timeBetweenReload && weapon.currentBulletsInMag > 0)
@@ -203,7 +170,51 @@ public class WeaponCombat : MonoBehaviour
         }
         yield return new WaitForSeconds(weapon.timeBetweenBullets);
     }
+    #endregion
 
+    #region reloading
+
+    IEnumerator ReloadSpecialSound()
+    {
+        yield return new WaitForSeconds(weapon.timeBeforeSpecialSound);
+        AudioSource.PlayClipAtPoint(weaponConfig.reloadThirdSound, transform.position);
+    }
+
+    IEnumerator ReloadMagBackInSound()
+    {
+        yield return new WaitForSeconds(weapon.timeBeforeMagBackIn);
+        AudioSource.PlayClipAtPoint(weaponConfig.reloadMagInSound, transform.position);
+    }
+    IEnumerator Reload()
+    {
+        if (weapon.currentTotalBullets > 0 && weapon.currentBulletsInMag < weapon.maxBulletsPerMag)
+        {
+            StartCoroutine(ReloadMagBackInSound());
+            if (weaponConfig.reloadThirdSound != null)
+            {
+                StartCoroutine(ReloadSpecialSound());
+            }
+
+            reloadTimer = 0f;
+            AudioSource.PlayClipAtPoint(weaponConfig.reloadMagOutSound, transform.position);
+
+            int bulletsLeftInMag = weapon.maxBulletsPerMag - weapon.currentBulletsInMag;
+            if (bulletsLeftInMag > weapon.currentTotalBullets)
+            {
+                bulletsLeftInMag = weapon.currentTotalBullets;
+            }
+            weapon.currentBulletsInMag += bulletsLeftInMag;
+            weapon.currentTotalBullets -= bulletsLeftInMag;
+
+            PlayAnimation(GetWeaponReloadTrigger());
+
+            yield return new WaitForSeconds(weapon.timeBetweenReload);
+            UpdateWeaponText();
+        }
+    }
+    #endregion
+
+    #region animations + weapontext update
     public void DrawWeapon()
     {
         PlayAnimation(GetWeaponDrawTrigger());
@@ -238,4 +249,5 @@ public class WeaponCombat : MonoBehaviour
     {
         return Animator.StringToHash("Draw");
     }
+    #endregion
 }

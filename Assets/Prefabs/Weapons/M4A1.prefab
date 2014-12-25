@@ -6382,7 +6382,7 @@ MonoBehaviour:
     maxBulletsPerMag: 40
     currentBulletsInMag: 0
     currentTotalBullets: 0
-    shootRange: 100
+    shootRange: 200
     timeBetweenBullets: .150000006
     timeBetweenReload: 1.29999995
     timeBeforeMagBackIn: .349999994
@@ -6395,6 +6395,7 @@ MonoBehaviour:
     reloadThirdSound: {fileID: 8300000, guid: 4aac3bcae6e034241bae5e681862a57a, type: 3}
     fireSound: {fileID: 8300000, guid: 6a65739f10c50b543bd616071faad274, type: 3}
     drawSound: {fileID: 8300000, guid: 823b1883be03db44d9818e9d360af2aa, type: 3}
+    zoomSound: {fileID: 0}
     fireParticle: {fileID: 19800000}
     weaponSprite: {fileID: 21300000, guid: 8e7b029177a97964c872dff4452a2144, type: 3}
   animator: {fileID: 9500000}

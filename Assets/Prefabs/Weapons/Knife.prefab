@@ -2642,12 +2642,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon:
-    bulletDamage: 125
+    bulletDamage: 50
     maxBullets: 0
     maxBulletsPerMag: 0
     currentBulletsInMag: 0
     currentTotalBullets: 0
-    shootRange: 3
+    shootRange: 4
     timeBetweenBullets: 1
     timeBetweenReload: 0
     timeBeforeMagBackIn: 0
@@ -2660,6 +2660,7 @@ MonoBehaviour:
     reloadThirdSound: {fileID: 0}
     fireSound: {fileID: 8300000, guid: 620571415e66f694c88828dba415d996, type: 3}
     drawSound: {fileID: 8300000, guid: 59c1d81beadaa804d921088fcc1f674f, type: 3}
+    zoomSound: {fileID: 0}
     fireParticle: {fileID: 0}
     weaponSprite: {fileID: 21300000, guid: 49a812dccb286834bbb53e5eb13f9b97, type: 3}
   animator: {fileID: 9500000}
