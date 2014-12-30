@@ -86,9 +86,8 @@ public class WeaponCombat : MonoBehaviour
         reloadTimer += Time.deltaTime;
 
         if (Input.GetKeyDown("r") && reloadTimer >= weapon.timeBetweenReload)
-        {
             StartCoroutine(Reload());
-        }
+
         if (Input.GetButton("Fire1"))
         {
             if (weapon.weaponType != WeaponType.KNIFE)
@@ -96,20 +95,19 @@ public class WeaponCombat : MonoBehaviour
             else
                 StartCoroutine(Knife());
         }
-        if (Input.GetButton("Zoom"))
+        if (Input.GetButton("Zoom") && weapon.weaponType == WeaponType.SNIPER)
             Zoom();
         else
             Camera.main.fieldOfView = 60f;
+
         if (aimLine != null && timer >= weapon.timeBetweenBullets * weapon.aimLineDisplayTime && weapon.weaponType != WeaponType.KNIFE)
-        {
             aimLine.enabled = false;
-        }
     }
     #region shooting/knifing/zooming
 
     public void Zoom()
     {
-        Camera.main.fieldOfView = 15f;
+        Camera.main.fieldOfView = 12f;
     }
     IEnumerator Shoot()
     {
@@ -122,8 +120,11 @@ public class WeaponCombat : MonoBehaviour
             AudioSource.PlayClipAtPoint(weaponConfig.fireSound, transform.position);
 
             PlayAnimation(GetWeaponShootTrigger());
-
-            shootParticle.Play();
+            if (weapon.weaponType == WeaponType.SNIPER)
+            {
+                GetComponent<SniperReloadShot>().ReloadBullet();
+            }
+            //shootParticle.Play();
             aimLine.enabled = true;
             aimLine.SetPosition(0, transform.position);
 
