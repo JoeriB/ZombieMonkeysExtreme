@@ -2,7 +2,10 @@
 using System.Collections;
 using UnityEngine.UI;
 using System;
-
+/**
+ * @Author: Joeri Boons
+ * @ZombieMonkeysExtreme Options Menu: handles in/outside game options.
+ */
 public class OptionsMenu : MonoBehaviour
 {
     public GameObject optionsMenu;

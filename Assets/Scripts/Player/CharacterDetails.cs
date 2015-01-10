@@ -8,16 +8,48 @@ using System;
 public class CharacterDetails : MonoBehaviour
 {
 
-    public string characterName;
-    public string description;
-    public float walkSpeed;
-    public float crouchSpeed;
-    public float runSpeed;
+    [SerializeField]
+    private string characterName;
+    [SerializeField]
+    private string description;
+    [SerializeField]
+    private float walkSpeed;
+    [SerializeField]
+    private float crouchSpeed;
+    [SerializeField]
+    private float runSpeed;
+    [SerializeField]
+    private PlayerAbilities ability;
+
+    public string GetName()
+    {
+        return characterName;
+    }
+
+    public float GetWalkSpeed()
+    {
+        return walkSpeed;
+    }
+
+    public float GetCrouchSpeed()
+    {
+        return crouchSpeed;
+    }
+
+    public float GetRunSpeed()
+    {
+        return runSpeed;
+    }
+
+    public PlayerAbilities GetAbility()
+    {
+        return ability;
+    }
 
     public override string ToString()
     {
-        return String.Format("Character Details:\n - Name: {0}\n - Description: {1}\n - Walking Speed: {2}\n - Crouching Speed: {3}\n - Running Speed: {4}",
-                                characterName, description, walkSpeed, crouchSpeed, runSpeed
+        return String.Format("Character Details:\n - Name: {0}\n - Description: {1}\n - Walking Speed: {2}\n - Crouching Speed: {3}\n - Running Speed: {4}\n - Special Ability: {5}",
+                                characterName, description, walkSpeed, crouchSpeed, runSpeed, ability
                             );
     }
 }

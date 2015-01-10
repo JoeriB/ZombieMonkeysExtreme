@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
-
+/**
+ * @Author: Joeri Boons
+ * @ZombieMonkeysExtreme Enemy Combat: handles our Zombie Combat: Attacking/Death
+ */
 public class EnemyCombat : MonoBehaviour
 {
     [Serializable]
@@ -64,7 +67,6 @@ public class EnemyCombat : MonoBehaviour
             //Check if the enemy is dead
             if (currentHealth <= 0)
                 HandleDeath();
-            //Play hurt sound
             else
                 AudioSource.PlayClipAtPoint(sounds.hurtShound, transform.position);
         }

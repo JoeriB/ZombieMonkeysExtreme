@@ -36,13 +36,13 @@ public class CharacterMenu : MonoBehaviour
                 if (activationObject.tag.Equals(TagManager.player))
                 {
                     activationObject.GetComponent<FPSPlayerMovement>().ApplyCharacterDetails(selectedCharacter.GetComponent<CharacterDetails>());
-                    activationObject.GetComponent<PlayerStats>().SetCharacterName(selectedCharacter.name);
+                    activationObject.GetComponent<PlayerStats>().SetCharacterDetails(selectedCharacter.GetComponent<CharacterDetails>());
                     activationObject.GetComponentInChildren<WeaponManager>().Initiate();
                     activationObject.GetComponent<Inventory>().Initiate();
                 }
             }
             GameObject.FindGameObjectWithTag(TagManager.characterSelect).SetActive(false);
-            //Only active our escape menu when we are in game..
+            //Only activate our escape menu when we are in game..
             EscapeMenu escMenu = GetComponent<EscapeMenu>();
             escMenu.enabled = true;
             escMenu.Instantiate();

@@ -44,7 +44,10 @@ public class PlayerStats : MonoBehaviour
     private float timeInGame;
     private bool isDead = false;
     private Animator animator;
-    private string characterName;
+    private CharacterDetails details;
+    private GameObject coordinateUI;
+    private Text coordinateUIText;
+    private bool coordinateVisible;
 
     void Start()
     {
@@ -57,6 +60,9 @@ public class PlayerStats : MonoBehaviour
         currentHealth = maxHealth;
         hud.playerHealthText.text = currentHealth + "/" + maxHealth;
         hud.playerKillsText.text = "Kill Score: " + currentKills;
+        coordinateUI = GameObject.FindGameObjectWithTag(TagManager.coordinateUI);
+        coordinateUIText = GameObject.FindGameObjectWithTag(TagManager.coordinateUIText).GetComponent<Text>();
+        coordinateUI.SetActive(false);
     }
 
     void Update()
@@ -65,6 +71,14 @@ public class PlayerStats : MonoBehaviour
         TimeSpan ts = TimeSpan.FromSeconds(timeInGame);
 
         hud.gameTimeText.text = string.Format("Game Time: {0:D2}:{1:D2}", ts.Minutes, ts.Seconds);
+
+        if (Input.GetKeyDown("h") && (details.GetAbility() == PlayerAbilities.DEVELOPER || details.GetAbility() == PlayerAbilities.COORDINATE_VISIONAIR))
+        {
+            coordinateVisible = !coordinateVisible;
+            coordinateUI.SetActive(coordinateVisible);
+        }
+        if (coordinateVisible)
+            coordinateUIText.text = "Current Location: " + transform.position;
     }
 
     public void IncrementKills()
@@ -112,7 +126,7 @@ public class PlayerStats : MonoBehaviour
         else
             sb.Append("You died trying to complete this simple mission. Better luck next time...").Append(Environment.NewLine);
         sb.Append(Environment.NewLine);
-        sb.Append("Played as ").Append(characterName).Append(Environment.NewLine);
+        sb.Append("Played as ").Append(details.GetName()).Append(Environment.NewLine);
         string time = string.Format("{0:D2}:{1:D2}", ts.Minutes, ts.Seconds);
         sb.Append("Total Game Time: ").Append(time).Append(Environment.NewLine);
         sb.Append("Total Zombies Killed: ").Append(currentKills).Append(Environment.NewLine);
@@ -120,8 +134,8 @@ public class PlayerStats : MonoBehaviour
         return sb.ToString();
     }
 
-    public void SetCharacterName(string name)
+    public void SetCharacterDetails(CharacterDetails charDetails)
     {
-        characterName = name;
+        this.details = charDetails;
     }
 }

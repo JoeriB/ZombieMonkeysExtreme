@@ -53,8 +53,8 @@ Transition:
   m_Name: 
   m_SrcState: {fileID: 110250661}
   m_DstState: {fileID: 110200000}
-  m_TransitionDuration: .026782155
-  m_TransitionOffset: 0
+  m_TransitionDuration: .0439617671
+  m_TransitionOffset: 1.43051352e-06
   m_Conditions:
   - m_ConditionMode: 1
     m_ConditionEvent: Walk
@@ -93,8 +93,8 @@ Transition:
   m_Name: 
   m_SrcState: {fileID: 110273174}
   m_DstState: {fileID: 110250661}
-  m_TransitionDuration: .402748197
-  m_TransitionOffset: .00369963213
+  m_TransitionDuration: .0566714108
+  m_TransitionOffset: .00181058084
   m_Conditions:
   - m_ConditionMode: 1
     m_ConditionEvent: Idle
@@ -113,8 +113,8 @@ Transition:
   m_Name: 
   m_SrcState: {fileID: 110250661}
   m_DstState: {fileID: 110273174}
-  m_TransitionDuration: .0282790661
-  m_TransitionOffset: .00316375517
+  m_TransitionDuration: 0
+  m_TransitionOffset: .00418478297
   m_Conditions:
   - m_ConditionMode: 1
     m_ConditionEvent: Chase
@@ -153,7 +153,7 @@ Transition:
   m_Name: 
   m_SrcState: {fileID: 110200000}
   m_DstState: {fileID: 110250661}
-  m_TransitionDuration: 0
+  m_TransitionDuration: .0966630802
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 1
@@ -236,7 +236,7 @@ State:
   - {fileID: 7400000, guid: 0c3d2a69679d3be41ab966d05c0e544c, type: 2}
   m_ParentStateMachine: {fileID: 110700000}
   m_Position: {x: 240, y: -120, z: 0}
-  m_IKOnFeet: 0
+  m_IKOnFeet: 1
   m_Mirror: 0
   m_Tag: 
 --- !u!1102 &110211579
@@ -301,10 +301,6 @@ StateMachine:
   m_ChildStateMachinePosition: []
   m_OrderedTransitions:
     data:
-      first: {fileID: 110211579}
-      second:
-      - {fileID: 110124610}
-    data:
       first: {fileID: 110250661}
       second:
       - {fileID: 110100000}
@@ -321,6 +317,10 @@ StateMachine:
       - {fileID: 110105229}
       - {fileID: 110105201}
       - {fileID: 110180159}
+    data:
+      first: {fileID: 110211579}
+      second:
+      - {fileID: 110124610}
   m_MotionSetCount: 1
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}

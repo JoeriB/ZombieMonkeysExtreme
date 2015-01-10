@@ -35,4 +35,6 @@ public class TagManager : MonoBehaviour
     public const string playerHealthBar = "PlayerHealthBar";
     public const string deathScreen = "DeathScreen";
     public const string ui = "UI";
+    public const string coordinateUIText = "PlayerCoordinateText";
+    public const string coordinateUI = "PlayerCoordinate";
 }

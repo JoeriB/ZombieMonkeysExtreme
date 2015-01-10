@@ -67,9 +67,9 @@ public class FPSPlayerMovement : MonoBehaviour
 
     public void ApplyCharacterDetails(CharacterDetails details)
     {
-        walkSpeed = details.walkSpeed;
-        crouchSpeed = details.crouchSpeed;
-        runSpeed = details.runSpeed;
+        walkSpeed = details.GetWalkSpeed();
+        crouchSpeed = details.GetCrouchSpeed();
+        runSpeed = details.GetRunSpeed();
     }
 }
 //var lastHeight = controller.height;

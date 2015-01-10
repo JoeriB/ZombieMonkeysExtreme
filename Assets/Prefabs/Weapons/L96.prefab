@@ -1341,7 +1341,7 @@ GameObject:
   - 33: {fileID: 3300026}
   - 23: {fileID: 2300026}
   m_Layer: 0
-  m_Name: Mesh_0014
+  m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1397,7 +1397,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &100182
 GameObject:
   m_ObjectHideFlags: 0
@@ -1425,6 +1425,8 @@ GameObject:
   - 4: {fileID: 400184}
   - 95: {fileID: 9500000}
   - 114: {fileID: 11400000}
+  - 114: {fileID: 11400002}
+  - 82: {fileID: 8200000}
   m_Layer: 0
   m_Name: L96
   m_TagString: Untagged
@@ -2623,7 +2625,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100178}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: .0250000004, y: -.412600011, z: .0498000011}
+  m_LocalPosition: {x: .0520000011, y: -.954999983, z: .104999997}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400182}
@@ -2666,7 +2668,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100184}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .391000003, y: -.335000008, z: .209999993}
+  m_LocalPosition: {x: .216000006, y: -.308999985, z: -.105999999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400182}
@@ -3158,6 +3160,64 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100182}
   m_Mesh: {fileID: 4300000, guid: 0c5b8f4ad0efe6f4fa502077ef9aa5db, type: 3}
+--- !u!82 &8200000
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100184}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!95 &9500000
 Animator:
   serializedVersion: 3
@@ -3167,7 +3227,7 @@ Animator:
   m_GameObject: {fileID: 100184}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 0c5b8f4ad0efe6f4fa502077ef9aa5db, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f223f2ff515797340ab27769b8841127, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -3186,15 +3246,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapon:
     bulletDamage: 200
+    bullet: {fileID: 100174}
     maxBullets: 100
     maxBulletsPerMag: 9
     currentBulletsInMag: 0
     currentTotalBullets: 0
     shootRange: 500
     timeBetweenBullets: 1.5
-    timeBetweenReload: 3
+    timeBetweenReload: 3.5
     timeBeforeMagBackIn: 1
-    timeBeforeSpecialSound: 1.20000005
+    timeBeforeSpecialSound: 2
     aimLineDisplayTime: 1
     weaponType: 2
   weaponConfig:
@@ -3207,6 +3268,23 @@ MonoBehaviour:
     fireParticle: {fileID: 19800000}
     weaponSprite: {fileID: 21300000, guid: 3beae9b122f849e4fa511ef531f75d39, type: 3}
   animator: {fileID: 9500000}
+  audioSource: {fileID: 0}
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e962ae70311a1a9488d1a7e1ca6ca750, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound:
+    boltOut: {fileID: 8300000, guid: 2453b8af6ab7ef2469f436b747a3155c, type: 3}
+    boltOutDelay: .699999988
+    boltIn: {fileID: 8300000, guid: bb0895f5745cc3f4fa38a5be56e5abc2, type: 3}
+    boltInDelay: 1
 --- !u!120 &12000000
 LineRenderer:
   m_ObjectHideFlags: 1

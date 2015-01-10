@@ -30,6 +30,8 @@ TagManager:
   - PlayerHealthBar
   - DeathScreen
   - UI
+  - PlayerCoordinateText
+  - PlayerCoordinate
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
