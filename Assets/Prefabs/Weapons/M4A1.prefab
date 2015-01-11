@@ -2021,7 +2021,6 @@ GameObject:
   - 4: {fileID: 400252}
   - 199: {fileID: 19900000}
   - 198: {fileID: 19800000}
-  - 120: {fileID: 12000000}
   m_Layer: 0
   m_Name: GunParticles
   m_TagString: GunParticle
@@ -4075,7 +4074,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100252}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .0320000015, y: .189999998, z: -1.25}
+  m_LocalPosition: {x: .0299999993, y: .150999993, z: -1.28999996}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400222}
@@ -6378,8 +6377,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapon:
     bulletDamage: 100
-    bullet: {fileID: 0}
-    maxBullets: 200
+    maxBullets: 600
     maxBulletsPerMag: 40
     currentBulletsInMag: 0
     currentTotalBullets: 0
@@ -6396,44 +6394,10 @@ MonoBehaviour:
     reloadThirdSound: {fileID: 8300000, guid: 4aac3bcae6e034241bae5e681862a57a, type: 3}
     fireSound: {fileID: 8300000, guid: 6a65739f10c50b543bd616071faad274, type: 3}
     drawSound: {fileID: 8300000, guid: 823b1883be03db44d9818e9d360af2aa, type: 3}
-    zoomSound: {fileID: 0}
-    fireParticle: {fileID: 19800000}
+    zoomSound: {fileID: 8300000, guid: f827a77639070ac46a37333bab304f16, type: 3}
     weaponSprite: {fileID: 21300000, guid: 8e7b029177a97964c872dff4452a2144, type: 3}
   animator: {fileID: 9500000}
   audioSource: {fileID: 0}
---- !u!120 &12000000
-LineRenderer:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100252}
-  m_Enabled: 0
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
-  m_Materials:
-  - {fileID: 2100000, guid: 7775c27624285054d9bac0b9e7394c14, type: 2}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_LightProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_Positions:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
-  m_Parameters:
-    startWidth: .0500000007
-    endWidth: .0500000007
-    m_StartColor:
-      serializedVersion: 2
-      rgba: 4294967295
-    m_EndColor:
-      serializedVersion: 2
-      rgba: 4294967295
-  m_UseWorldSpace: 1
 --- !u!137 &13700000
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -6711,10 +6675,10 @@ ParticleSystem:
         rgba: 4294967295
       maxColor:
         serializedVersion: 2
-        rgba: 4278249721
+        rgba: 4278224127
       minMaxState: 0
     startSize:
-      scalar: 1
+      scalar: .5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -6826,7 +6790,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
       minMaxState: 0
-    cnt0: 8
+    cnt0: 30
     cnt1: 30
     cnt2: 30
     cnt3: 30
@@ -6883,7 +6847,7 @@ ParticleSystem:
   RotationModule:
     enabled: 0
     curve:
-      scalar: .785398185
+      scalar: .785398126
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -6924,7 +6888,7 @@ ParticleSystem:
           rgba: 4294967295
         key1:
           serializedVersion: 2
-          rgba: 1175043071
+          rgba: 1174444543
         key2:
           serializedVersion: 2
           rgba: 15103
@@ -6944,7 +6908,7 @@ ParticleSystem:
           serializedVersion: 2
           rgba: 0
         ctime0: 22937
-        ctime1: 40670
+        ctime1: 45104
         ctime2: 65535
         ctime3: 65535
         ctime4: 65535
@@ -7121,7 +7085,7 @@ ParticleSystem:
         m_PostInfinity: 2
       minMaxState: 0
     z:
-      scalar: 2
+      scalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:

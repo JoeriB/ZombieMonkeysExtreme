@@ -44,9 +44,7 @@ public class EnemyMovement : MonoBehaviour
         combat = GetComponent<EnemyCombat>();
         //Random Patrol point to start with
         randomPatrolPoint = patrol.patrolPoint.position + UnityEngine.Random.insideUnitSphere * patrol.patrolRadius;
-        //TODO: Animations: RUN ANIM/CHASE ANIMS/ATTACK ANIMS/MAKE SURE THEY CAN ATTACK BACK
         animator = GetComponent<Animator>();
-        //TODO: Complete Cleanup + scripts nakijken/commentaar/end screen
     }
     void Update()
     {
@@ -62,8 +60,11 @@ public class EnemyMovement : MonoBehaviour
         }
         if (distance > chaseDistance)
         {
-            patrolArea();
-            PlayAnimation(Animator.StringToHash("Walk"));
+            if (patrol.patrolPoint != null)
+            {
+                patrolArea();
+                PlayAnimation(Animator.StringToHash("Walk"));
+            }
         }
     }
 
@@ -120,5 +121,10 @@ public class EnemyMovement : MonoBehaviour
     {
         if (!animator.GetCurrentAnimatorStateInfo(0).nameHash.Equals(animationHash))
             animator.SetTrigger(animationHash);
+    }
+
+    public void SetPatrolPoint(Transform patrolPoint)
+    {
+        patrol.patrolPoint = patrolPoint;
     }
 }

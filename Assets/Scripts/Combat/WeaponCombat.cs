@@ -13,7 +13,6 @@ public class WeaponCombat : MonoBehaviour
     public class Weapon
     {
         public int bulletDamage = 100;
-        public GameObject bullet;
         public int maxBullets = 200;
         public int maxBulletsPerMag = 40;
         public int currentBulletsInMag = 0;
@@ -36,7 +35,6 @@ public class WeaponCombat : MonoBehaviour
         public AudioClip fireSound;
         public AudioClip drawSound;
         public AudioClip zoomSound;
-        public ParticleSystem fireParticle;
         public Sprite weaponSprite;
     }
 
@@ -51,6 +49,7 @@ public class WeaponCombat : MonoBehaviour
     private float reloadTimer;
     [SerializeField]
     private AudioSource audioSource;
+    private bool zoomed;
 
     void Start()
     {
@@ -92,75 +91,65 @@ public class WeaponCombat : MonoBehaviour
         if (Input.GetButton("Fire1"))
         {
             if (weapon.weaponType != WeaponType.KNIFE)
-                StartCoroutine(Shoot());
+                FireGun();
             else
-                StartCoroutine(Knife());
+                KnifeEnemy();
         }
-        if (Input.GetButton("Zoom") && weapon.weaponType == WeaponType.SNIPER)
+        if (Input.GetButtonDown("Zoom") && weapon.weaponType == WeaponType.SNIPER)
             Zoom();
-        else
-            Camera.main.fieldOfView = 60f;
     }
-
     #region shooting/knifing/zooming
 
     public void Zoom()
     {
-        Camera.main.fieldOfView = 11f;
+        PlaySound(weaponConfig.zoomSound);
+        zoomed = !zoomed;
+        Camera.main.fieldOfView = (zoomed) ? 11f : 60f;
     }
-    IEnumerator Shoot()
+
+    IEnumerator DealDamage()
+    {
+        timer = 0f;
+        RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+
+        if (weapon.weaponType == WeaponType.SNIPER)
+            GetComponent<SniperReloadShot>().ReloadBullet(weaponConfig.fireSound);
+        else
+            PlaySound(weaponConfig.fireSound);
+
+        PlayAnimation(GetWeaponShootTrigger());
+
+        if (Physics.Raycast(ray, out hit, weapon.shootRange))
+        {
+            EnemyCombat enemy = hit.collider.GetComponent<EnemyCombat>();
+            if (enemy != null)
+                enemy.HandleIncomingDamage(weapon.bulletDamage);
+        }
+
+        //Delay van bullet
+        yield return new WaitForSeconds(weapon.timeBetweenBullets);
+    }
+    void FireGun()
     {
         if (timer >= weapon.timeBetweenBullets && reloadTimer >= weapon.timeBetweenReload && weapon.currentBulletsInMag > 0)
         {
-            timer = 0f;
-            RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+            shootParticle.Play();
+            StartCoroutine(DealDamage());
 
-            if (weapon.weaponType == WeaponType.SNIPER)
-                GetComponent<SniperReloadShot>().ReloadBullet(weaponConfig.fireSound);
-            else
-                PlaySound(weaponConfig.fireSound);
-
-            PlayAnimation(GetWeaponShootTrigger());
-            //shootParticle.Play();
-            if (Physics.Raycast(ray, out hit, weapon.shootRange))
-            {
-                EnemyCombat enemy = hit.collider.GetComponent<EnemyCombat>();
-                if (enemy != null)
-                    enemy.HandleIncomingDamage(weapon.bulletDamage);
-            }
             weapon.currentBulletsInMag--;
-
             UpdateWeaponText();
             if (weapon.currentBulletsInMag <= 0)
             {
                 StartCoroutine(Reload());
             }
-            //Delay van bullet
-            yield return new WaitForSeconds(weapon.timeBetweenBullets);
         }
     }
 
-    IEnumerator Knife()
+    void KnifeEnemy()
     {
         if (timer >= weapon.timeBetweenBullets)
-        {
-            timer = 0f;
-            RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
-
-            PlaySound(weaponConfig.fireSound);
-            PlayAnimation(GetWeaponShootTrigger());
-
-            if (Physics.Raycast(ray, out hit, weapon.shootRange))
-            {
-                EnemyCombat enemy = hit.collider.GetComponent<EnemyCombat>();
-                if (enemy != null)
-                    enemy.HandleIncomingDamage(weapon.bulletDamage);
-            }
-            UpdateWeaponText();
-        }
-        yield return new WaitForSeconds(weapon.timeBetweenBullets);
+            StartCoroutine(DealDamage());
     }
     #endregion
 
@@ -250,8 +239,7 @@ public class WeaponCombat : MonoBehaviour
     {
         if (clip != null)
         {
-            audioSource.clip = clip;
-            audioSource.Play();
+            audioSource.PlayOneShot(clip);
         }
     }
 }

@@ -573,7 +573,6 @@ GameObject:
   - 4: {fileID: 400074}
   - 95: {fileID: 9500000}
   - 114: {fileID: 11400000}
-  - 82: {fileID: 8200000}
   m_Layer: 0
   m_Name: MP-443
   m_TagString: Weapon
@@ -882,7 +881,6 @@ GameObject:
   - 4: {fileID: 400114}
   - 199: {fileID: 19900000}
   - 198: {fileID: 19800000}
-  - 120: {fileID: 12000000}
   m_Layer: 0
   m_Name: GunParticles
   m_TagString: GunParticle
@@ -2133,8 +2131,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100114}
-  m_LocalRotation: {x: -3.09086268e-08, y: -.707106829, z: -.707106829, w: 3.09086268e-08}
-  m_LocalPosition: {x: -.0350000001, y: -.326000005, z: .0540000014}
+  m_LocalRotation: {x: 0, y: .707106829, z: .707106829, w: 0}
+  m_LocalPosition: {x: .00300000003, y: -.324999988, z: .0379999988}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400178}
@@ -2903,64 +2901,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100174}
   m_Mesh: {fileID: 4300014, guid: 13154e961b65fbe409a71aafa1439032, type: 3}
---- !u!82 &8200000
-AudioSource:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100074}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
 --- !u!95 &9500000
 Animator:
   serializedVersion: 3
@@ -2988,9 +2928,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon:
-    bulletDamage: 120
-    bullet: {fileID: 0}
-    maxBullets: 50
+    bulletDamage: 125
+    maxBullets: 200
     maxBulletsPerMag: 8
     currentBulletsInMag: 0
     currentTotalBullets: 0
@@ -3007,44 +2946,10 @@ MonoBehaviour:
     reloadThirdSound: {fileID: 8300000, guid: 2403dcbeb556dba478eed6d80219f8cb, type: 3}
     fireSound: {fileID: 8300000, guid: 4cc96073578d1a04782fd7ef785f8bf1, type: 3}
     drawSound: {fileID: 8300000, guid: 609e54b1731d57349bee390a29d15360, type: 3}
-    zoomSound: {fileID: 0}
-    fireParticle: {fileID: 19800000}
+    zoomSound: {fileID: 8300000, guid: f827a77639070ac46a37333bab304f16, type: 3}
     weaponSprite: {fileID: 21300000, guid: 80d99e2f5c8924a478c740142fd2c485, type: 3}
   animator: {fileID: 9500000}
   audioSource: {fileID: 0}
---- !u!120 &12000000
-LineRenderer:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100114}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
-  m_Materials:
-  - {fileID: 2100000, guid: 7775c27624285054d9bac0b9e7394c14, type: 2}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_LightProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_Positions:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: -1, z: -1}
-  m_Parameters:
-    startWidth: .0500000007
-    endWidth: .0500000007
-    m_StartColor:
-      serializedVersion: 2
-      rgba: 4294967295
-    m_EndColor:
-      serializedVersion: 2
-      rgba: 4294967295
-  m_UseWorldSpace: 1
 --- !u!137 &13700000
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -3322,10 +3227,10 @@ ParticleSystem:
         rgba: 4294967295
       maxColor:
         serializedVersion: 2
-        rgba: 4278249721
+        rgba: 4278224127
       minMaxState: 0
     startSize:
-      scalar: 1
+      scalar: .5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -3437,7 +3342,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
       minMaxState: 0
-    cnt0: 8
+    cnt0: 30
     cnt1: 30
     cnt2: 30
     cnt3: 30
@@ -3494,7 +3399,7 @@ ParticleSystem:
   RotationModule:
     enabled: 0
     curve:
-      scalar: .785398185
+      scalar: .785398126
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -3535,7 +3440,7 @@ ParticleSystem:
           rgba: 4294967295
         key1:
           serializedVersion: 2
-          rgba: 1175043071
+          rgba: 1174444543
         key2:
           serializedVersion: 2
           rgba: 15103
@@ -3555,7 +3460,7 @@ ParticleSystem:
           serializedVersion: 2
           rgba: 0
         ctime0: 22937
-        ctime1: 40670
+        ctime1: 45104
         ctime2: 65535
         ctime3: 65535
         ctime4: 65535
@@ -3732,7 +3637,7 @@ ParticleSystem:
         m_PostInfinity: 2
       minMaxState: 0
     z:
-      scalar: 2
+      scalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:

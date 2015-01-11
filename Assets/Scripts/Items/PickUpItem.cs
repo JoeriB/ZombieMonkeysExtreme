@@ -18,8 +18,8 @@ public class PickUpItem : MonoBehaviour
     public Item item;
 
     private GameObject player;
-    bool canPickUpItem = false;
-    Inventory inventory;
+    private bool canPickUpItem = false;
+    private Inventory inventory;
 
     void Start()
     {
@@ -40,20 +40,11 @@ public class PickUpItem : MonoBehaviour
     void OnTriggerEnter(Collider collider)
     {
         if (collider.tag.Equals(TagManager.player))
-        {
             canPickUpItem = true;
-        }
     }
     void OnTriggerExit(Collider collider)
     {
         if (collider.tag.Equals(TagManager.player))
             canPickUpItem = true;
-    }
-    private Quaternion LookAtTarget(Vector3 target)
-    {
-        var newRotation = Quaternion.LookRotation(target);
-        newRotation.x = 0;
-        newRotation.z = 0;
-        return Quaternion.Slerp(transform.rotation, newRotation, 10 * Time.deltaTime);
     }
 }

@@ -89,25 +89,29 @@ public class PlayerStats : MonoBehaviour
 
     public IEnumerator HandleIncomingDamage(int damage)
     {
-        yield return new WaitForSeconds(audioDelay);
-        AudioClip audioClip = null;
-        int animationTrigger = 0;
-        if (!isPlayerDead())
+        if (!GetComponent<EndGame>().IsEnding())
         {
-            currentHealth -= damage;
-            hud.playerHealthText.text = currentHealth + "/" + maxHealth;
-            hud.playerHealthBarSlider.value = currentHealth;
-            audioClip = sound.hurtSound;
-            animationTrigger = Animator.StringToHash("Hurt");
+            yield return new WaitForSeconds(audioDelay);
+            AudioClip audioClip = null;
+            int animationTrigger = 0;
+            if (!isPlayerDead())
+            {
+                currentHealth -= damage;
+                hud.playerHealthText.text = currentHealth + "/" + maxHealth;
+                hud.playerHealthBarSlider.value = currentHealth;
+                audioClip = sound.hurtSound;
+                animationTrigger = Animator.StringToHash("Hurt");
+            }
+            if (currentHealth <= 0)
+            {
+                isDead = true;
+                audioClip = sound.deathSound;
+                animationTrigger = Animator.StringToHash("Hurt");
+                StartCoroutine(GetComponent<EndGame>().EndTheGame());
+            }
+            AudioSource.PlayClipAtPoint(audioClip, transform.position);
+            animator.SetTrigger(animationTrigger);
         }
-        if (currentHealth <= 0)
-        {
-            isDead = true;
-            audioClip = sound.deathSound;
-            StartCoroutine(GetComponent<EndGame>().EndTheGame());
-        }
-        AudioSource.PlayClipAtPoint(audioClip, transform.position);
-        animator.SetTrigger(animationTrigger);
     }
 
     public bool isPlayerDead()
@@ -130,7 +134,7 @@ public class PlayerStats : MonoBehaviour
         string time = string.Format("{0:D2}:{1:D2}", ts.Minutes, ts.Seconds);
         sb.Append("Total Game Time: ").Append(time).Append(Environment.NewLine);
         sb.Append("Total Zombies Killed: ").Append(currentKills).Append(Environment.NewLine);
-        sb.Append("Items collected: ").Append(GetComponent<Inventory>().getItemCount()).Append("/").Append(GetComponent<Inventory>().slots.Length).Append(Environment.NewLine);
+        sb.Append("Items collected: ").Append(GetComponent<Inventory>().getItemCount()).Append("/").Append(GetComponent<Inventory>().GetSlots().Length).Append(Environment.NewLine);
         return sb.ToString();
     }
 

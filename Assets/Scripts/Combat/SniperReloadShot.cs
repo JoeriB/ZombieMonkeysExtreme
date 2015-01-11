@@ -27,6 +27,7 @@ public class SniperReloadShot : MonoBehaviour
     {
         audioSource.clip = clip;
         audioSource.Play();
+        Camera.main.fieldOfView = 60f;
         StartCoroutine(BoltIn());
         StartCoroutine(BoltOut());
     }

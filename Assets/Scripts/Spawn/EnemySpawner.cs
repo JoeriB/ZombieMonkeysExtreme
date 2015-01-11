@@ -7,12 +7,16 @@ using System.Collections;
  */
 public class EnemySpawner : MonoBehaviour, SpawnManager
 {
-    public GameObject spawnPrefab;
-    public float spawnTime = 3f;
-    public float spawnRadius = 10f;
-    public int maxSpawnsPerPoint = 40;
-    public Transform[] spawnPoints;
-    public GameObject parent;
+    [SerializeField]
+    private GameObject spawnPrefab;
+    [SerializeField]
+    private float spawnRadius = 10f;
+    [SerializeField]
+    private int maxSpawnsPerPoint = 40;
+    [SerializeField]
+    private Transform[] spawnPoints;
+    [SerializeField]
+    private GameObject parent;
 
     int spawnPointIndex = 0;
 
@@ -38,5 +42,7 @@ public class EnemySpawner : MonoBehaviour, SpawnManager
         GameObject spawnedEnemy = Instantiate(spawnPrefab, position, spawnPoints[spawnPointIndex].rotation) as GameObject;
         //Add GameObject to right Parent Folder in Hierarchy
         spawnedEnemy.transform.parent = parent.transform;
+        //Set the right patrol point for the right enemy
+        spawnedEnemy.GetComponent<EnemyMovement>().SetPatrolPoint(spawnPoints[spawnPointIndex]);
     }
 }

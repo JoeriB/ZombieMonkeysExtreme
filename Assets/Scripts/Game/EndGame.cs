@@ -14,7 +14,12 @@ public class EndGame : MonoBehaviour
     public GameObject[] uiMonkeys;
     public float endGameDelay;
 
+    [SerializeField]
+    private AudioClip failEndGame;
+    [SerializeField]
+    private AudioClip successEndGame;
     private bool canEndGame;
+    private bool ending;
     private Inventory inventory;
 
     void Start()
@@ -26,25 +31,29 @@ public class EndGame : MonoBehaviour
     {
         if (canEndGame && !endGameDoor.isDoorOpen())
         {
-            if (inventory.hasAllItems())
+            if (inventory.hasAllItems() && !ending)
                 StartCoroutine(EndTheGame());
         }
     }
 
     public IEnumerator EndTheGame()
     {
+        ending = true;
         GameObject player = GameObject.FindGameObjectWithTag(TagManager.player);
         Screen.lockCursor = false;
 
         deathScreen.SetActive(true);
         deathScreen.GetComponentInChildren<Text>().text = player.GetComponent<PlayerStats>().GetEndGameText();
 
+        GetComponent<AudioSource>().PlayOneShot((player.GetComponent<PlayerStats>().isPlayerDead() ? failEndGame : successEndGame));
+
         foreach (GameObject monkey in uiMonkeys)
         {
             monkey.SetActive(monkey);
         }
 
-        GetComponent<FPSMouseMovement>().enabled = false;
+        player.GetComponent<FPSPlayerMovement>().enabled = false;
+        player.GetComponent<FPSMouseMovement>().enabled = false;
         GameObject.FindGameObjectWithTag(TagManager.weaponManager).SetActive(false);
         GameObject.FindGameObjectWithTag(TagManager.playerHUD).SetActive(false);
         GameObject.FindGameObjectWithTag(TagManager.ui).GetComponent<EscapeMenu>().enabled = false;
@@ -63,5 +72,10 @@ public class EndGame : MonoBehaviour
     {
         if (collider.tag.Equals(TagManager.safeHouse))
             canEndGame = false;
+    }
+
+    public bool IsEnding()
+    {
+        return ending;
     }
 }

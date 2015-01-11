@@ -8,17 +8,12 @@ using System;
  */
 public class WeaponManager : MonoBehaviour
 {
-    [Serializable]
-    public class Switch
-    {
-        public bool canSwitch = false;
-        public float timeBetweenSwitch = 2f;
-        public float switchTimer = 0f;
-    }
-    public Switch switchConfig;
-    public GameObject[] weaponList;
-    public int currentWeaponIndex = 0;
-    public GameObject currentWeapon;
+    [SerializeField]
+    private GameObject[] weaponList;
+    [SerializeField]
+    private int currentWeaponIndex = 0;
+    [SerializeField]
+    private GameObject currentWeapon;
 
     public void Initiate()
     {
@@ -32,32 +27,23 @@ public class WeaponManager : MonoBehaviour
 
     void Update()
     {
-        switchConfig.switchTimer += Time.deltaTime;
-        if (!switchConfig.canSwitch && switchConfig.switchTimer >= switchConfig.timeBetweenSwitch)
+        if (Input.GetAxis("Mouse ScrollWheel") < 0)
         {
-            switchConfig.canSwitch = true;
+            currentWeaponIndex = ((currentWeaponIndex + 1) < weaponList.Length) ? (currentWeaponIndex + 1) : 0;
+            SelectWeapon();
         }
-        if (switchConfig.canSwitch)
+        else if (Input.GetAxis("Mouse ScrollWheel") > 0)
         {
-            switchConfig.switchTimer = 0f;
-            if (Input.GetAxis("Mouse ScrollWheel") < 0)
-            {
-                currentWeaponIndex = ((currentWeaponIndex + 1) < weaponList.Length) ? (currentWeaponIndex + 1) : 0;
-                SelectWeapon();
-            }
-            else if (Input.GetAxis("Mouse ScrollWheel") > 0)
-            {
-                currentWeaponIndex = ((currentWeaponIndex - 1) >= 0) ? (currentWeaponIndex - 1) : (weaponList.Length - 1);
-                SelectWeapon();
-            }
-            if (currentWeaponIndex == weaponList.Length + 1)
-            {
-                currentWeaponIndex = 0;
-            }
-            if (currentWeaponIndex == -1)
-            {
-                currentWeaponIndex = 0;
-            }
+            currentWeaponIndex = ((currentWeaponIndex - 1) >= 0) ? (currentWeaponIndex - 1) : (weaponList.Length - 1);
+            SelectWeapon();
+        }
+        if (currentWeaponIndex == weaponList.Length + 1)
+        {
+            currentWeaponIndex = 0;
+        }
+        if (currentWeaponIndex == -1)
+        {
+            currentWeaponIndex = 0;
         }
     }
 
@@ -66,11 +52,8 @@ public class WeaponManager : MonoBehaviour
         ActivateNextWeapon();
 
         WeaponCombat weaponCombat = currentWeapon.GetComponent<WeaponCombat>();
-        //weaponCombat.Initiate();
         weaponCombat.DrawWeapon();
         weaponCombat.UpdateWeaponText();
-
-        switchConfig.canSwitch = false;
     }
 
     private void ActivateNextWeapon()

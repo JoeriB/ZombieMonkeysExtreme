@@ -17,8 +17,8 @@ public class DoorManager : MonoBehaviour
     public Animator animator;
     public Sound sound;
 
-    bool canOpen = false;
-    bool doorOpen = false;
+    private bool canOpen = false;
+    private bool doorOpen = false;
 
     void Update()
     {

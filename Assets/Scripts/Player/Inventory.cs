@@ -8,11 +8,12 @@ using System;
  */
 public class Inventory : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject inventoryUI;
+    [SerializeField]
+    private GameObject[] slots;
 
-    public GameObject inventoryUI;
-    public GameObject[] slots;
-
-    int counter;
+    private int counter;
 
     public void Initiate()
     {
@@ -47,5 +48,10 @@ public class Inventory : MonoBehaviour
     public int getItemCount()
     {
         return counter;
+    }
+
+    public GameObject[] GetSlots()
+    {
+        return slots;
     }
 }

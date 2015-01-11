@@ -1327,7 +1327,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100060}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 97.6100006, y: -3.51999998, z: 150.940002}
+  m_LocalPosition: {x: 98.0599976, y: -3, z: 174.899994}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400026}
@@ -1796,6 +1796,7 @@ MonoBehaviour:
     deathSound: {fileID: 8300000, guid: c2031325eee045f4695d22a9db36f6a9, type: 3}
     hurtShound: {fileID: 8300000, guid: 10af8b1b78a49a042a0f5a8b8534b798, type: 3}
     attackSound: {fileID: 8300000, guid: cc28efa0002525f4faca77c5dc4ccc9a, type: 3}
+  currentHealth: 0
 --- !u!137 &13700000
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -1894,7 +1895,7 @@ CharacterController:
   m_GameObject: {fileID: 100060}
   serializedVersion: 2
   m_Height: 4.46999979
-  m_Radius: .460000008
+  m_Radius: .75999999
   m_SlopeLimit: 45
   m_StepOffset: .300000012
   m_SkinWidth: .0799999982

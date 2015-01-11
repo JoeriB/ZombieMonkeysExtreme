@@ -27,6 +27,7 @@ public class EnemyCombat : MonoBehaviour
     public EnemyStats enemy;
     public SoundConfig sounds;
 
+    [SerializeField]
     private int currentHealth;
     private PlayerStats player;
     private float cooldownTimer;
@@ -48,12 +49,13 @@ public class EnemyCombat : MonoBehaviour
         if (cooldownTimer >= enemy.attackCooldown && !player.isPlayerDead())
         {
             cooldownTimer = 0f;
-            //Todo: Gooien met items? Melee systeem? Depends on zombie Type
+
             if (enemy.attackStyle == EnemyAttackStyle.MELEE)
                 PlayAnimation(Animator.StringToHash("MeleeAttack"));
             if (enemy.attackStyle == EnemyAttackStyle.RANGED)
                 Debug.Log("Ranged stuff throw stuff");
-            StartCoroutine(player.HandleIncomingDamage(enemy.attackDamage));
+            if (!player.isPlayerDead())
+                StartCoroutine(player.HandleIncomingDamage(enemy.attackDamage));
         }
     }
 
@@ -61,9 +63,9 @@ public class EnemyCombat : MonoBehaviour
     {
         if (sounds.hurtShound != null)
         {
-            //TODO: Hurt/Death Animation
             //Apply damage
             currentHealth -= damage;
+            PlayAnimation(Animator.StringToHash("Hurt"));
             //Check if the enemy is dead
             if (currentHealth <= 0)
                 HandleDeath();

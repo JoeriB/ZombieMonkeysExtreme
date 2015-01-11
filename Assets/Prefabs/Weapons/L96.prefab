@@ -1341,7 +1341,7 @@ GameObject:
   - 33: {fileID: 3300026}
   - 23: {fileID: 2300026}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: BulletHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1433,7 +1433,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &100186
 GameObject:
   m_ObjectHideFlags: 1
@@ -1444,7 +1444,6 @@ GameObject:
   - 4: {fileID: 400186}
   - 199: {fileID: 19900000}
   - 198: {fileID: 19800000}
-  - 120: {fileID: 12000000}
   m_Layer: 0
   m_Name: GunParticles
   m_TagString: GunParticle
@@ -2682,8 +2681,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100186}
-  m_LocalRotation: {x: -1.15202326e-07, y: -.707106829, z: -.707106829, w: 1.15202326e-07}
-  m_LocalPosition: {x: -0, y: -.42899999, z: -0}
+  m_LocalRotation: {x: 0, y: .707106829, z: .707106829, w: -1.99266718e-24}
+  m_LocalPosition: {x: .00899999961, y: -.354999989, z: -.0109999999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400188}
@@ -3246,8 +3245,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapon:
     bulletDamage: 200
-    bullet: {fileID: 100174}
-    maxBullets: 100
+    maxBullets: 300
     maxBulletsPerMag: 9
     currentBulletsInMag: 0
     currentTotalBullets: 0
@@ -3265,8 +3263,7 @@ MonoBehaviour:
     fireSound: {fileID: 8300000, guid: a7463721391b49c44ae72f179e446491, type: 3}
     drawSound: {fileID: 8300000, guid: 6f5cb67c8b0f98948b69f2931ea2a3b4, type: 3}
     zoomSound: {fileID: 8300000, guid: f827a77639070ac46a37333bab304f16, type: 3}
-    fireParticle: {fileID: 19800000}
-    weaponSprite: {fileID: 21300000, guid: 3beae9b122f849e4fa511ef531f75d39, type: 3}
+    weaponSprite: {fileID: 21300000, guid: 163d1e4737a4f6343b1aa8286f541053, type: 3}
   animator: {fileID: 9500000}
   audioSource: {fileID: 0}
 --- !u!114 &11400002
@@ -3285,39 +3282,6 @@ MonoBehaviour:
     boltOutDelay: .699999988
     boltIn: {fileID: 8300000, guid: bb0895f5745cc3f4fa38a5be56e5abc2, type: 3}
     boltInDelay: 1
---- !u!120 &12000000
-LineRenderer:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100186}
-  m_Enabled: 0
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
-  m_Materials:
-  - {fileID: 2100000, guid: 7775c27624285054d9bac0b9e7394c14, type: 2}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_LightProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_Positions:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
-  m_Parameters:
-    startWidth: .0500000007
-    endWidth: .0500000007
-    m_StartColor:
-      serializedVersion: 2
-      rgba: 4294967295
-    m_EndColor:
-      serializedVersion: 2
-      rgba: 4294967295
-  m_UseWorldSpace: 1
 --- !u!137 &13700000
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -3595,10 +3559,10 @@ ParticleSystem:
         rgba: 4294967295
       maxColor:
         serializedVersion: 2
-        rgba: 4278249721
+        rgba: 4278224127
       minMaxState: 0
     startSize:
-      scalar: 1
+      scalar: .5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -3710,7 +3674,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
       minMaxState: 0
-    cnt0: 8
+    cnt0: 30
     cnt1: 30
     cnt2: 30
     cnt3: 30
@@ -3767,7 +3731,7 @@ ParticleSystem:
   RotationModule:
     enabled: 0
     curve:
-      scalar: .785398185
+      scalar: .785398126
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -3808,7 +3772,7 @@ ParticleSystem:
           rgba: 4294967295
         key1:
           serializedVersion: 2
-          rgba: 1175043071
+          rgba: 1174444543
         key2:
           serializedVersion: 2
           rgba: 15103
@@ -3828,7 +3792,7 @@ ParticleSystem:
           serializedVersion: 2
           rgba: 0
         ctime0: 22937
-        ctime1: 40670
+        ctime1: 45104
         ctime2: 65535
         ctime3: 65535
         ctime4: 65535
@@ -4005,7 +3969,7 @@ ParticleSystem:
         m_PostInfinity: 2
       minMaxState: 0
     z:
-      scalar: 2
+      scalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:

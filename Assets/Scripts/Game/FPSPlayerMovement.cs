@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 /**
  * @Author: Joeri Boons
@@ -10,6 +11,16 @@ using System.Collections;
 [RequireComponent(typeof(FPSMouseMovement))]
 public class FPSPlayerMovement : MonoBehaviour
 {
+    [Serializable]
+    public class Footstep
+    {
+        public AudioClip rightStep;
+        public AudioClip leftStep;
+        public float runCooldown;
+        public float walkCooldown;
+    }
+    [SerializeField]
+    private Footstep footStep;
     //Speed when walking
     public float walkSpeed = 5f;
     //Speed when crouching
@@ -33,8 +44,10 @@ public class FPSPlayerMovement : MonoBehaviour
     private Vector3 moveDirection = Vector3.zero;
     //Our current speed;
     private float speed;
-    //initial character controller radius:
-    private bool bounce;
+    //Footstep cooldown timer
+    private float stepCooldown;
+    //Step counter for left/right sounds
+    private int stepCounter;
 
     void Start()
     {
@@ -43,6 +56,7 @@ public class FPSPlayerMovement : MonoBehaviour
 
     void Update()
     {
+        stepCooldown += Time.deltaTime;
         float inputX = Input.GetAxis("Horizontal");
         float inputY = Input.GetAxis("Vertical");
         float inputModifyFactor = (inputX != 0.0f && inputY != 0.0f && limitDiagonalSpeed) ? .70f : 1.0f;
@@ -54,6 +68,14 @@ public class FPSPlayerMovement : MonoBehaviour
             moveDirection = new Vector3(inputX * inputModifyFactor, 0, inputY * inputModifyFactor);
             moveDirection = transform.TransformDirection(moveDirection);
             moveDirection *= speed;
+            if (inputX != 0.0f || inputY != 0.0f)
+            {
+                if (stepCooldown >= ((speed == runSpeed) ? footStep.runCooldown : footStep.walkCooldown))
+                {
+                    stepCooldown = 0f;
+                    GetComponent<AudioSource>().PlayOneShot((stepCounter++ % 2 == 0) ? footStep.rightStep : footStep.leftStep);
+                }
+            }
 
             if (Input.GetButton("Jump"))
                 moveDirection.y = jumpHeight;
@@ -72,21 +94,3 @@ public class FPSPlayerMovement : MonoBehaviour
         runSpeed = details.GetRunSpeed();
     }
 }
-//var lastHeight = controller.height;
-//controller.height = Mathf.Lerp(controller.height, currentHeight, crouchSmoothness * Time.deltaTime);
-//var position = transform.position;
-//position.y = (controller.height - lastHeight) / 2;
-
-//transform.position = position;
-//take your last radius
-//var lastradius = controller.radius;
-////adjust the character controller radius for crouching
-//controller.radius = Mathf.Lerp(controller.radius, radius, crouchSmoothness * Time.deltaTime);
-////take current position to alter it later.
-//var position = transform.position;
-////use this calculation to prevent from falling through the floor ... -.-
-//var calculatedifference = (controller.radius - lastradius) / 2;
-//if (calculatedifference > 0)
-//    position.y += calculatedifference;
-////make you stand up after crouch
-//transform.position = position;

@@ -8,11 +8,13 @@ using System.Collections.Generic;
  */
 public class ItemSpawner : MonoBehaviour, SpawnManager
 {
-    public GameObject[] items;
-    public Transform[] spawnPoints;
-    public GameObject parent;
-
-    int counter;
+    [SerializeField]
+    private GameObject[] items;
+    [SerializeField]
+    private Transform[] spawnPoints;
+    [SerializeField]
+    private GameObject parent;
+    private int counter;
 
     void Start()
     {
