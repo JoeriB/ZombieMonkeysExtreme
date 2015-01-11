@@ -44,6 +44,8 @@ public class OptionsMenu : MonoBehaviour
             inGameAudio.volume = volume / 10f;
             gameVolumeButton.GetComponentInChildren<Text>().text = volume.ToString();
             gameVolumeErrorText.GetComponent<Text>().enabled = false;
+            GameObject.FindGameObjectWithTag(TagManager.weaponManager).GetComponent<AudioSource>().volume = volume / 10f;
+            GameObject.FindGameObjectWithTag(TagManager.weaponManager).GetComponentInChildren<AudioSource>().volume = volume / 10f;
         }
         else
             gameVolumeErrorText.GetComponent<Text>().enabled = true;
